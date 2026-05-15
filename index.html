@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caleb Adams</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sans: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto",
+              "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+      --text:           #000;
+      --text-light:     #494e52;
+      --link:           #2f7f93;
+      --link-hover:     #1d5061;
+      --masthead-link:  #494e52;
+      --masthead-hover: #1a1d1f;
+      --border:         #f2f3f3;
+      --bg:             #fff;
+      --sidebar-w:      200px;
+      --masthead-h:     70px;
+      --content-max:    740px;
+      --page-max:       1180px;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.625;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+    p { margin-bottom: 1em; }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .masthead__inner {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 0 1rem;
+      height: var(--masthead-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .masthead__title a {
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--masthead-link);
+      text-decoration: none;
+    }
+
+    .masthead__title a:hover { color: var(--masthead-hover); }
+
+    .greedy-nav { display: flex; list-style: none; }
+
+    .greedy-nav a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: var(--masthead-link);
+      text-decoration: none;
+    }
+
+    .greedy-nav a:hover,
+    .greedy-nav a[aria-current="page"] { color: var(--masthead-hover); text-decoration: none; }
+
+    /* ── PAGE WRAPPER ── */
+    #main {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: calc(var(--masthead-h) + 1.5rem);
+    }
+
+    .author__avatar {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #e4e4e4;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: #aaa;
+      text-align: center;
+    }
+
+    .author__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .author__name {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .author__bio {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .author__urls { list-style: none; font-size: 0.8125rem; line-height: 1.5; }
+
+    .author__urls li { padding: 0.2rem 0; border-top: 1px solid var(--border); }
+    .author__urls li:first-child { border-top: none; }
+
+    .author__urls a {
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .author__urls a:hover { color: var(--link); text-decoration: none; }
+    .author__urls svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── CONTENT ── */
+    .page { flex: 1; min-width: 0; max-width: var(--content-max); }
+
+    .page__title {
+      font-size: 1.5625em;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .page__content h2 {
+      font-size: 1.25em;
+      font-weight: bold;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page__content p {
+      font-size: 1rem;
+      line-height: 1.625;
+      color: var(--text);
+    }
+
+    /* ── ARCHIVE (project list) ── */
+    .archive__item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .archive__item:first-child { border-top: 1px solid var(--border); }
+
+    .archive__item-teaser {
+      width: 160px;
+      height: 120px;
+      overflow: hidden;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #aaa;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .archive__item-teaser img { width: 100%; height: 100%; object-fit: cover; }
+
+    .archive__item-title {
+      font-size: 0.9375rem;
+      font-weight: bold;
+      margin-bottom: 0.15rem;
+      line-height: 1.3;
+    }
+
+    .archive__item-title a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .archive__item-title a:hover { color: var(--link); text-decoration: underline; }
+
+    .archive__item-excerpt {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+      line-height: 1.5;
+    }
+
+    .archive__item-tags {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+    }
+
+    /* ── SEE ALL LINK ── */
+    .see-all {
+      display: block;
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--link);
+    }
+
+    .see-all:hover { color: var(--link-hover); text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .page__footer {
+      background: #404040;
+      color: #aaa;
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 3rem;
+    }
+
+    .page__footer a { color: #aaa; }
+    .page__footer a:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      #main { flex-direction: column; }
+      .sidebar { width: 100%; position: static; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+      .author__avatar { width: 80px; height: 80px; margin: 0; flex-shrink: 0; }
+      .archive__item { grid-template-columns: 1fr; }
+      .archive__item-teaser { width: 100%; height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead__inner">
+    <div class="masthead__title"><a href="index.html">Caleb Adams</a></div>
+    <nav>
+      <ul class="greedy-nav">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div id="main">
+
+  <div class="sidebar">
+    <div class="author__avatar">
+      <!-- <img src="artifacts/profile/photo.jpg" alt="Caleb Adams" /> -->
+      Photo
+    </div>
+    <div class="author__content">
+      <h3 class="author__name">Caleb Adams</h3>
+      <p class="author__bio">Master's student, Mechanical Engineering<br>MIT &amp; Australian Fulbright Scholar</p>
+      <ul class="author__urls">
+        <li>
+          <a href="https://github.com/CalebA03" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/adamscaleb03/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <article class="page">
+    <h1 class="page__title">Caleb Adams</h1>
+    <div class="page__content">
+
+      <p>I'm a graduate student in the MIT 77 Lab working with Dr. Krebs, and an Australian Fulbright Visiting Scholar. My research focuses on developing medical devices that integrate into everyday objects. Currently I'm working on tremor cancellation devices for people with Parkinson's disease.</p>
+      <p>I'm interested in precision machine design, assistive technology, manufacturing, and machine learning applied to medical devices.</p>
+      <p>Outside the lab: climbing, running, and building things.</p>
+
+      <h2>Recent Projects</h2>
+
+      <!-- PROJECT 1 -->
+      <div class="archive__item">
+        <div class="archive__item-teaser">
+          <!-- <img src="artifacts/lathe/thumb.jpg" alt="Desktop Precision Lathe" /> -->
+          Photo
+        </div>
+        <div class="archive__item-body">
+          <h2 class="archive__item-title"><a href="_projects/lathe.html">Desktop Precision Lathe</a></h2>
+          <p class="archive__item-excerpt">Designed and manufactured a small precision desktop lathe capable of turning and facing 12L14 steel to 50 µm repeatability. MIT 2.72 Elements of Mechanical Design, 2025.</p>
+          <p class="archive__item-tags">Machine design &middot; GD&amp;T &middot; SolidWorks FEA &middot; MATLAB &middot; Waterjet &middot; CNC</p>
+        </div>
+      </div>
+
+      <!-- Add up to 4 more recent projects here in the same format -->
+
+      <a class="see-all" href="projects.html">See all projects &rarr;</a>
+
+    </div>
+  </article>
+
+</div>
+
+<footer class="page__footer">
+  <p>&copy; 2025 Caleb Adams</p>
+</footer>
+
+</body>
+</html>
