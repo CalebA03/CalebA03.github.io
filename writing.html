@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects</title>
+  <title>Writing</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -140,55 +140,24 @@
     .page__title {
       font-size: 1.5625em;
       font-weight: bold;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       line-height: 1.2;
     }
 
-    .archive__item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
+    .page__content p {
+      font-size: 1rem;
+      line-height: 1.625;
+      color: var(--text);
     }
 
-    .archive__item:first-child { border-top: 1px solid var(--border); }
-
-    .archive__item-teaser {
-      width: 160px;
-      height: 120px;
-      overflow: hidden;
-      background: #e8e8e8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: #aaa;
+    .empty-state {
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 2.5rem 1.5rem;
       text-align: center;
-      flex-shrink: 0;
-    }
-
-    .archive__item-teaser img { width: 100%; height: 100%; object-fit: cover; }
-
-    .archive__item-title {
-      font-size: 0.9375rem;
-      font-weight: bold;
-      margin-bottom: 0.15rem;
-      line-height: 1.3;
-    }
-
-    .archive__item-title a { color: var(--text); text-decoration: none; }
-    .archive__item-title a:hover { color: var(--link); text-decoration: underline; }
-
-    .archive__item-excerpt {
-      font-size: 0.875rem;
       color: var(--text-light);
-      margin-bottom: 0.3rem;
-      line-height: 1.5;
+      margin-top: 1.5rem;
     }
-
-    .archive__item-tags { font-size: 0.8125rem; color: var(--text-light); }
 
     .page__footer {
       background: #404040;
@@ -206,8 +175,6 @@
       #main { flex-direction: column; }
       .sidebar { width: 100%; position: static; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
       .author__avatar { width: 80px; height: 80px; margin: 0; flex-shrink: 0; }
-      .archive__item { grid-template-columns: 1fr; }
-      .archive__item-teaser { width: 100%; height: 200px; }
     }
   </style>
 </head>
@@ -215,12 +182,12 @@
 
 <div class="masthead">
   <div class="masthead__inner">
-    <div class="masthead__title"><a href="../index.html">Caleb Adams</a></div>
+    <div class="masthead__title"><a href="index.html">Caleb Adams</a></div>
     <nav>
       <ul class="greedy-nav">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="projects.html" aria-current="page">Projects</a></li>
-        <li><a href="writing.html">Writing</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="writing.html" aria-current="page">Writing</a></li>
       </ul>
     </nav>
   </div>
@@ -253,45 +220,13 @@
   </div>
 
   <article class="page">
-    <h1 class="page__title">Projects</h1>
-
-    <!-- PROJECT 1 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/lathe/FullLathe.jpeg" alt="Desktop Precision Lathe" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/lathe.html">2.72 - Desktop Lathe</a></h2>
-        <p class="archive__item-excerpt">For 2.72 my group designed and manufactured a small precision desktop lathe capable of turning and facing 12L14 steel with ~10 µm precision.</p>
+    <h1 class="page__title">Writing</h1>
+    <div class="page__content">
+      <p>I don't have anything posted here yet, but I'm leaving this section up for whenever the urge to write up some advice or a blog post strikes.</p>
+      <div class="empty-state">
+        Nothing here yet — check back later.
       </div>
     </div>
-
-    <!-- PROJECT 2 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <span>Thumbnail placeholder</span>
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/divine-comedy.html">The Divine Comedy as a Complex System</a></h2>
-        <p class="archive__item-excerpt">Applying network, statistical, and entropy analysis from Complex Systems to Dante's <em>Divine Comedy</em>, published in the ACM Journal on Computing and Cultural Heritage.</p>
-      </div>
-    </div>
-
-    <!-- Add future projects below in the same format:
-
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/PROJECTNAME/thumb.jpg" alt="Project title" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="_projects/PROJECTNAME.html">Project Title</a></h2>
-        <p class="archive__item-excerpt">Short description. Course or context, year.</p>
-        <p class="archive__item-tags">Tag &middot; Tag &middot; Tag</p>
-      </div>
-    </div>
-
-    -->
-
   </article>
 
 </div>

@@ -189,6 +189,15 @@
     /* reduced-width wrapper for lower-quality images */
     .figure--small {
       max-width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 75% width wrapper for images shrunk purely for layout, not quality */
+    .figure--075 {
+      max-width: 75%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .figure__caption {
@@ -196,6 +205,7 @@
       color: var(--text-light);
       margin-top: 0.35rem;
       font-style: italic;
+      text-align: center;
     }
 
     .figure-row {
@@ -208,6 +218,8 @@
     /* reduced-width row for lower-quality side-by-side pairs */
     .figure-row--small {
       max-width: 75%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .figure-row .figure { margin: 0; }
@@ -229,7 +241,7 @@
       .sidebar { width: 100%; position: static; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
       .author__avatar { width: 80px; height: 80px; margin: 0; flex-shrink: 0; }
       .figure-row, .figure-row--small { grid-template-columns: 1fr; max-width: 100%; }
-      .figure--small { max-width: 100%; }
+      .figure--small, .figure--075 { max-width: 100%; }
     }
   </style>
 </head>
@@ -242,6 +254,7 @@
       <ul class="greedy-nav">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../projects.html" aria-current="page">Projects</a></li>
+        <li><a href="../writing.html">Writing</a></li>
       </ul>
     </nav>
   </div>
@@ -286,8 +299,8 @@
 
       <p>For the class, we are tasked with designing, modelling, fabricating, and assembling a precision benchtop lathe that can cut 12L14 steel to within 50 microns precision, can survive being dropped from 1.5m without failure of a critical component, and can avoid failure when being hit with a hammer. Beyond these requirements we were given free rein to design our functional requirements (FRs) however best suited our "customer". This customer for our group was a materials testing facility that needed to produce one standard sample to ASTM E8 standards in less than 15 minutes. We developed lathe level FRs. These include FRs for accuracy, portability, maximum part size, cost, power, safety, material removal rate, noise output, safety, maintenance intervals, stiffness, efficiency, and cutting forces. With these lathe FRs, we derived subsystem-level FRs for the spindle, cross slide, z drive, and CNC.</p>
 
-      <!-- full width — photo quality is good -->
-      <div class="figure">
+      <!-- photo quality is good — shrunk to 75% purely for layout -->
+      <div class="figure figure--075">
         <div class="figure__img">
           <img src="../artifacts/lathe/FullLathe.jpeg" alt="Finished lathe" />
         </div>
@@ -314,7 +327,7 @@
       <!-- BLOG EDIT: "Fatigue is an important design factor to consider avoiding spindle failure" is slightly awkward. Suggest: "Fatigue was the critical failure mode I needed to rule out for the spindle shaft." Then keep the rest of the paragraph as written. -->
       <p>Fatigue is an important design factor to consider avoiding spindle failure. To calculate this, I created a free body diagram (FBD) of the spindle (see Figure 3). Then, using the FBD I calculated the location of the maximum bending moment and thus the largest axial stress. I then used the Marin factor method to adjust the endurance limit for 12L14 steel (the material of our shaft) to calculate a revised endurance limit (see Figure 4). This method adjusts the idealised laboratory endurance limit down to reflect real world conditions. Using this method I adjusted the endurance limit of the steel for the fabrication method (machined finish), the size factor (larger materials have more potential internal defects), the mode in which stress is being applied, the temperature (high temperatures reduce endurance), the reliability (95% reliability, the same as the bearings), and stress concentration factors (fillet radii). I found that the endurance limit of the shaft was ~63% greater than the maximum load and thus it will not fail in fatigue.</p>
 
-      <!-- SpindleFBDFatigueBending not reuploaded — reduced width pair -->
+      <!-- SpindleFBDFatigueBending reuploaded from portfolio PDF — reduced width pair -->
       <!-- MarinFactors reuploaded — but paired with a smaller image so whole row stays small -->
       <div class="figure-row figure-row--small">
         <div class="figure">
@@ -336,7 +349,7 @@
       <!-- BLOG EDIT: "it was brought to our attention" is passive. Suggest: "a reviewer pointed out" or "our progress review revealed". Change only that phrase, keep the rest of the paragraph exactly as written. -->
       <p>For spindle measurement, I was the team lead. This involved creating a plan to measure all our FRs, which we met. One notable experiment we ran was the run-out measurement. During progress review 1, it was brought to our attention that we hadn't used the proper runout measurement technique (see Figure 5). In this set-up we are measuring both the spindle runout and concentricity of the shaft. To correct this, we re-measured run out using the Donaldson and Estler face motion reversal techniques. The Donaldson technique required the use of two dial indicators diametrically opposite on the shaft to measure the run out and subtract concentricity errors. The Estler technique is an extension of Donaldson for measuring the axial run out and involves three dial indicators. This lowered our runout from an average of 14.6 microns to 1.5 microns. This run-out is far below our FRs and allowed us to redistribute our error budget elsewhere in the lathe design.</p>
 
-      <!-- Run-out testing not reuploaded — reduced width -->
+      <!-- Run-out testing reuploaded from portfolio PDF — no longer needs width cap -->
       <div class="figure figure--small">
         <div class="figure__img">
           <img src="../artifacts/lathe/Run-out testing.PNG" alt="Incorrect run out measurement technique" />
@@ -361,7 +374,7 @@
       <!-- BLOG EDIT: "first as always, we created an FBD" — the "as always" is an in-joke for the class. For a blog reader, consider cutting that phrase or replacing with "as a first step". Keep the rest of the paragraph as written. -->
       <p>For the lead screw force modelling, first as always, we created a free-body diagram (FBD) to work out the requisite forces. Noting that as designed the lead screw takes all the axial load during cutting. The axial force is found trivially as all the axial force travels through the lead screw. The radial force is calculated by considering the stiffnesses of the dovetail, bushing and lead screw acting in parallel and calculating the expected total deflection. Then from this you can calculate the deflection in the lead screw and hence the radial force experienced (see Figure 8). This force is much, much smaller (2 N) than the axial force.</p>
 
-      <!-- CrossSlideLeadscrewRadialLoads not reuploaded — reduced width pair -->
+      <!-- CrossSlideLeadscrewRadialLoads reuploaded from portfolio PDF — reduced width pair -->
       <div class="figure-row figure-row--small">
         <div class="figure">
           <div class="figure__img">
@@ -392,7 +405,7 @@
         </div>
         <div class="figure">
           <div class="figure__img">
-            <img src="../artifacts/lathe/CriticalLeadscrewForceCalculat....PNG" alt="Critical lead screw force calculations" />
+            <img src="../artifacts/lathe/CriticalLeadscrewForceCalculations.PNG" alt="Critical lead screw force calculations" />
           </div>
           <p class="figure__caption">Figure 10. Critical lead screw force calculations.</p>
         </div>
@@ -405,7 +418,7 @@
       <!-- NewIndicatorWheel reuploaded — full width -->
       <div class="figure">
         <div class="figure__img">
-          <img src="../artifacts/lathe/NewIndicatorWheel.PNG" alt="New indicator wheel CAD" />
+          <img src="../artifacts/lathe/NewIndicatorWheel.PNG" alt="New indicator wheel CAD" style="max-width: 614px;" />
         </div>
         <p class="figure__caption">Figure 11. New indicator wheel CAD.</p>
       </div>
@@ -413,7 +426,7 @@
       <!-- BLOG EDIT: "A cross slide HTM was something I also created" is back-to-front word order. Suggest: "I also created a cross slide homogeneous transformation matrix (HTM) model" — then add the gloss "(HTM — a mathematical tool for tracking how small errors at each joint stack up at the tool tip)" before continuing with the rest of the sentence as written. -->
       <p>A cross slide HTM (homogeneous transformation matrix — a mathematical tool for tracking how small errors at each joint stack up at the tool tip) was something I also created for modelling the cross slide. It was designed to capture changes in the tool tip position due to axial loading of the lead screw, lead screw misalignment, thermal expansion of the lead screw, bending of the tool post, and deflection of the tool tip. Effects such as deflection of the dovetail were neglected using order of magnitude (OOM) estimates.</p>
 
-      <!-- HTM images not reuploaded — reduced width pair -->
+      <!-- HTM images reuploaded from portfolio PDF (much higher res) — reduced width pair -->
       <div class="figure-row figure-row--small">
         <div class="figure">
           <div class="figure__img">
@@ -435,7 +448,7 @@
 
       <p>For the z drive a similar constraint layout was chosen to that of the cross slide, except radial constraints were added to both ends of the tube stock as the dancing queen removed the radial constraint provided by the lead screw nut.</p>
 
-      <!-- ZDriveAssembly not reuploaded — reduced width -->
+      <!-- ZDriveAssembly reuploaded from portfolio PDF -->
       <div class="figure figure--small">
         <div class="figure__img">
           <img src="../artifacts/lathe/ZDriveAssembly.PNG" alt="Z drive assembly CAD cross section view" />
@@ -445,8 +458,8 @@
 
       <p>For this sub assembly, my role was to design the tail stock modifications, carriage rail flexure, side skirts (in part), and do bolted joint calculations for the CNC motor mounts and the side skirts. Starting with the tail stock modifications. I created the CAD and completed the machining for this part (see Figure 15). In terms of machining, the processes that were involved were; widening the central pocket to accommodate the tube stock, drilling and milling side pockets for the guide rods, cutting slits for the guide rod holes to allow for tightening, drilling and milling bolt holes to tighten the clamps on the guide rods and to fasten the L brackets to them. This piece also underwent GD&amp;T (see Figure 15). For the GD&amp;T, we specified locations of guide rod holes and the central pocket to within 2 thou of the nominal location. This was specified as these dimensions determine the alignment of the tube stock and the guide rods which are critical structural elements. Tight tolerances were also specified for critical diameters, such as the tub stock pocket and the guide rod holes. This was because if these were oversized it would lead to significant misalignment and that would eat into the error budget that our potting was aiming to correct.</p>
 
-      <!-- Tailstock_GDT reuploaded — full width -->
-      <div class="figure">
+      <!-- Tailstock_GDT reuploaded — shrunk to 75% -->
+      <div class="figure figure--075">
         <div class="figure__img">
           <img src="../artifacts/lathe/Tailstock_GDT.PNG" alt="Tail stock GD&T" />
         </div>
@@ -495,10 +508,10 @@
 
       <p>After it was manufactured, the CRF was put to the test in the death cut in progress review 3 (maximum expected cutting forces). The CRF didn't fail during this test and hasn't failed during drop testing nor any subsequent testing, hence is expected to meet all FRs in ongoing operations.</p>
 
-      <!-- FailedWaterjet not reuploaded — reduced width -->
+      <!-- FailedWaterjet reuploaded from portfolio PDF — width cap reduced to match new native size -->
       <div class="figure figure--small">
         <div class="figure__img">
-          <img src="../artifacts/lathe/FailedWaterjet.PNG" alt="Failed waterjet attempt on the CRF" />
+          <img src="../artifacts/lathe/FailedWaterjet.PNG" alt="Failed waterjet attempt on the CRF" style="max-width: 412px;" />
         </div>
         <p class="figure__caption">Figure 19. Failed waterjet attempt on the CRF.</p>
       </div>
@@ -531,7 +544,7 @@
 
       <p>For the motor selection process, their driving requirement was torque at a given RPM. To determine the required torque, we considered the torque required to achieve the desired angular acceleration of the lead screw, the desired linear acceleration of the carriage and/or dovetail, and the rotational inertia of the coupling and the motor ~0.6 Nm (see Figure 22). Then from there we had the desired RPM derived from the material removal rate lathe level FR (~160RPM both axes). From this I looked at manufacturers specification sheets and found a reasonably priced and relatively easy to ship (US based supplier) motor that could provide the required torque at the desired RPM.</p>
 
-      <!-- MotorTorque not reuploaded — reduced width pair -->
+      <!-- MotorTorque reuploaded from portfolio PDF — reduced width pair -->
       <div class="figure-row figure-row--small">
         <div class="figure">
           <div class="figure__img">
@@ -552,7 +565,7 @@
       <!-- CNC Motor Mount reuploaded — full width -->
       <div class="figure">
         <div class="figure__img">
-          <img src="../artifacts/lathe/CNC Motor Mount.PNG" alt="Schematic of the CNC motor mounts for the cross slide" />
+          <img src="../artifacts/lathe/CNC Motor Mount.PNG" alt="Schematic of the CNC motor mounts for the cross slide" style="max-width: 573px;" />
         </div>
         <p class="figure__caption">Figure 23. Schematic of the CNC motor mounts for the cross slide.</p>
       </div>
