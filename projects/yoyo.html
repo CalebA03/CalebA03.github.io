@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects</title>
+  <title>Yo-Yo Manufacturing</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -140,55 +140,71 @@
     .page__title {
       font-size: 1.5625em;
       font-weight: bold;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
       line-height: 1.2;
     }
 
-    .archive__item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
+    .page__meta {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
     }
 
-    .archive__item:first-child { border-top: 1px solid var(--border); }
+    .page__content h2 {
+      font-size: 1.25em;
+      font-weight: bold;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
 
-    .archive__item-teaser {
-      width: 160px;
-      height: 120px;
+    .page__content p {
+      font-size: 1rem;
+      line-height: 1.625;
+      color: var(--text);
+    }
+
+    /* figures — full width by default */
+    .figure { margin: 1.25rem 0; }
+
+    .figure__img {
+      width: 100%;
       overflow: hidden;
       background: #e8e8e8;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: #aaa;
       text-align: center;
-      flex-shrink: 0;
     }
 
-    .archive__item-teaser img { width: 100%; height: 100%; object-fit: cover; }
-
-    .archive__item-title {
-      font-size: 0.9375rem;
-      font-weight: bold;
-      margin-bottom: 0.15rem;
-      line-height: 1.3;
+    .figure__img img,
+    .figure__img video {
+      width: 100%;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
 
-    .archive__item-title a { color: var(--text); text-decoration: none; }
-    .archive__item-title a:hover { color: var(--link); text-decoration: underline; }
-
-    .archive__item-excerpt {
-      font-size: 0.875rem;
+    .figure__caption {
+      font-size: 0.75rem;
       color: var(--text-light);
-      margin-bottom: 0.3rem;
-      line-height: 1.5;
+      margin-top: 0.35rem;
+      font-style: italic;
+      text-align: center;
     }
 
-    .archive__item-tags { font-size: 0.8125rem; color: var(--text-light); }
+    .figure-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+
+    .figure-row .figure { margin: 0; }
+
+    .figure--sm { max-width: 420px; margin-left: auto; margin-right: auto; }
 
     .page__footer {
       background: #404040;
@@ -206,8 +222,7 @@
       #main { flex-direction: column; }
       .sidebar { width: 100%; position: static; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
       .author__avatar { width: 80px; height: 80px; margin: 0; flex-shrink: 0; }
-      .archive__item { grid-template-columns: 1fr; }
-      .archive__item-teaser { width: 100%; height: 200px; }
+      .figure-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -219,8 +234,8 @@
     <nav>
       <ul class="greedy-nav">
         <li><a href="../index.html">Home</a></li>
-        <li><a href="projects.html" aria-current="page">Projects</a></li>
-        <li><a href="writing.html">Writing</a></li>
+        <li><a href="../projects.html" aria-current="page">Projects</a></li>
+        <li><a href="../writing.html">Writing</a></li>
       </ul>
     </nav>
   </div>
@@ -230,7 +245,7 @@
 
   <div class="sidebar">
     <div class="author__avatar">
-      <img src="artifacts/Headshot.jpeg" alt="Caleb Adams" />
+      <img src="../artifacts/Headshot.jpeg" alt="Caleb Adams" />
     </div>
     <div class="author__content">
       <h3 class="author__name">Caleb Adams</h3>
@@ -256,78 +271,96 @@
   </div>
 
   <article class="page">
-    <h1 class="page__title">Projects</h1>
 
-    <!-- PROJECT 1 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/copper-spoons/single_spoon.jpeg" alt="Copper Spoons" />
+    <h1 class="page__title">Yo-Yo Manufacturing</h1>
+    <p class="page__meta">With Ana In&ecirc;s Casimiro, Ana Oliveira, and Bernardo Marchana &middot; MIT Portugal Summer Program, 31 July 2026</p>
+
+    <div class="page__content">
+
+      <h2>Overview</h2>
+
+      <p>Our team designed and manufactured a custom yo-yo from scratch for the MIT Portugal Summer Program, working through the full production chain: mold design, SLA prototyping, CNC machined tooling, thermoforming, and injection molding. We built thirty of each part to run as a small production batch.</p>
+
+      <h2>Designing the Mold</h2>
+
+      <p>We designed the tooling in CAD first. The injection mold split into a cavity and a core that formed the yo-yo body, and a separate mold carried the Vila Vi&ccedil;osa crest as a raised feature for the thermoformed caps.</p>
+
+      <div class="figure-row">
+        <div class="figure">
+          <div class="figure__img">
+            <img src="../artifacts/yoyo/mold_design.png" alt="CAD design of the thermoform mold with the Vila Vicosa crest" />
+          </div>
+          <p class="figure__caption">The thermoform mold, with the Vila Vi&ccedil;osa crest raised in the centre.</p>
+        </div>
+        <div class="figure">
+          <div class="figure__img">
+            <img src="../artifacts/yoyo/mold_cavity_core.png" alt="Cavity and core CAD design for the injection mold" />
+          </div>
+          <p class="figure__caption">Cavity and core for the injection mold that formed the yo-yo body.</p>
+        </div>
       </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/copper-spoons.html">Copper Spoons</a></h2>
-        <p class="archive__item-excerpt">Hand forming a set of copper spoons: die cutting, work hardening, heat treating, and brazing.</p>
+
+      <h2>SLA Printing and Thermoforming</h2>
+
+      <p>We printed the thermoform mold on an SLA printer to get the resolution the crest needed. From there we drilled vacuum holes through the mold so the heated plastic sheet would pull down tight against the detail rather than bridging over it. Thermoforming itself took several rounds of tuning: heat, fan time, and hold time all had to be balanced against each other, and we adjusted the source artwork to account for how far the plastic shrank once it cooled. The grid below shows part of that iteration, caps pulled at different settings and checked against the target ring size and feature depth.</p>
+
+      <div class="figure">
+        <div class="figure__img">
+          <img src="../artifacts/yoyo/thermoform_test_grid.png" alt="Grid of thermoformed test caps at different process settings" />
+        </div>
+        <p class="figure__caption">Thermoformed caps from successive rounds of process tuning.</p>
       </div>
+
+      <h2>CNC Machining the Mold</h2>
+
+      <p>While the thermoform mold went through SLA printing, we CNC machined the aluminium cavity and core for the injection mold, choosing feeds and speeds for each cutting pass. The two clips below are from that process: the CAM toolpath setup, and the mill cutting the mold itself.</p>
+
+      <div class="figure-row">
+        <div class="figure">
+          <div class="figure__img">
+            <video src="../artifacts/yoyo/cam.mov" controls playsinline></video>
+          </div>
+          <p class="figure__caption">CAM toolpath setup for the mold.</p>
+        </div>
+        <div class="figure">
+          <div class="figure__img">
+            <video src="../artifacts/yoyo/cnc_machining.mov" controls playsinline></video>
+          </div>
+          <p class="figure__caption">CNC machining the mold.</p>
+        </div>
+      </div>
+
+      <h2>Injection Molding</h2>
+
+      <p>With the mold finished, we ran it on an injection molding machine to produce the yo-yo bodies and rings, thirty of each. Getting a consistent run meant setting up the mold on its supports, calibrating the distance on the machine, and adjusting shot parameters until parts came out fully filled without flashing at the parting line.</p>
+
+      <div class="figure-row">
+        <div class="figure">
+          <div class="figure__img">
+            <img src="../artifacts/yoyo/injection_machine.png" alt="Injection molding machine used to produce the yo-yo parts" />
+          </div>
+          <p class="figure__caption">The injection molding machine used to produce the parts.</p>
+        </div>
+        <div class="figure">
+          <div class="figure__img">
+            <img src="../artifacts/yoyo/injection_results.png" alt="Batch of injection moulded yo-yo bodies and rings" />
+          </div>
+          <p class="figure__caption">The injection moulded bodies and rings, thirty of each.</p>
+        </div>
+      </div>
+
+      <h2>Results</h2>
+
+      <p>Assembling the injection moulded bodies and rings with the thermoformed, crested caps gave us thirty finished yo-yos, each one carrying the Vila Vi&ccedil;osa crest.</p>
+
+      <div class="figure figure--sm">
+        <div class="figure__img">
+          <img src="../artifacts/yoyo/final_yoyos.png" alt="Finished yo-yos with thermoformed Vila Vicosa crest caps" />
+        </div>
+        <p class="figure__caption">Finished yo-yos, assembled and strung.</p>
+      </div>
+
     </div>
-
-    <!-- PROJECT 2 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/yoyo/final_yoyos.png" alt="Yo-Yo Manufacturing" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/yoyo.html">Yo-Yo Manufacturing</a></h2>
-        <p class="archive__item-excerpt">Designing and manufacturing a custom yo-yo from mold design through SLA printing, CNC machining, thermoforming, and injection molding.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 3 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/lathe/FullLathe.jpeg" alt="Desktop Precision Lathe" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/lathe.html">2.72 - Desktop Lathe</a></h2>
-        <p class="archive__item-excerpt">For 2.72 my group designed and manufactured a small precision desktop lathe capable of turning and facing 12L14 steel with ~10 µm precision.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 4 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="projects/reports/tremor-features/images/TS-TCC_Model_Diagram.png" alt="Learning Interpretable Tremor Features" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/tremor-features.html">Learning Interpretable Tremor Features</a></h2>
-        <p class="archive__item-excerpt">A contrastive learning model trained on wearable IMU data, compared against hand designed tremor features.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 5 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/divine-comedy/fig1_word_adjacency_network.png" alt="Word adjacency network of the Divine Comedy" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/divine-comedy.html">The Divine Comedy as a Complex System</a></h2>
-        <p class="archive__item-excerpt">Applying network, statistical, and entropy analysis from Complex Systems to Dante's <em>Divine Comedy</em>, published in the ACM Journal on Computing and Cultural Heritage.</p>
-      </div>
-    </div>
-
-    <!-- Add future projects below in the same format:
-
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/PROJECTNAME/thumb.jpg" alt="Project title" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="_projects/PROJECTNAME.html">Project Title</a></h2>
-        <p class="archive__item-excerpt">Short description. Course or context, year.</p>
-        <p class="archive__item-tags">Tag &middot; Tag &middot; Tag</p>
-      </div>
-    </div>
-
-    -->
-
   </article>
 
 </div>

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<!-- MathJax for LaTeX-style math -->
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+	</script>
+
+	<link rel="shortcut icon" href="images/icon.ico">
+	<style type="text/css">
+		body {
+			background-color: #f5f9ff;
+		}
+
+		.content-margin-container {
+			display: flex;
+			width: 100%;
+			justify-content: left;
+			align-items: flex-start;
+		}
+
+		.main-content-block {
+			width: 70%;
+			max-width: 1100px;
+			background-color: #fff;
+			border-left: 1px solid #DDD;
+			border-right: 1px solid #DDD;
+			padding: 8px;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+				"Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+				sans-serif;
+		}
+
+		.margin-left-block {
+			font-size: 14px;
+			width: 15%;
+			max-width: 130px;
+			position: relative;
+			margin-left: 10px;
+			text-align: left;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+				"Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+				sans-serif;
+			padding: 5px;
+		}
+
+		.margin-right-block {
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+				"Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+				sans-serif;
+			font-size: 14px;
+			width: 25%;
+			max-width: 256px;
+			position: relative;
+			text-align: left;
+			padding: 10px;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+			display: block;
+			margin: auto;
+		}
+
+		.my-video {
+			max-width: 100%;
+			height: auto;
+			display: block;
+			margin: auto;
+		}
+
+		a:link,
+		a:visited {
+			color: #0e7862;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #24b597;
+		}
+
+		h1 {
+			font-size: 20px;
+			margin-top: 16px;
+			margin-bottom: 10px;
+		}
+
+		h2 {
+			font-size: 18px;
+			margin-top: 14px;
+			margin-bottom: 6px;
+		}
+
+		h3 {
+			font-size: 16px;
+			margin-top: 12px;
+			margin-bottom: 4px;
+		}
+
+		table.header {
+			font-weight: 300;
+			font-size: 17px;
+			flex-grow: 1;
+			width: 70%;
+			max-width: calc(100% - 290px);
+		}
+
+		table td,
+		table td * {
+			vertical-align: middle;
+			position: relative;
+		}
+
+		hr {
+			height: 1px;
+			border: none;
+			background-color: #DDD;
+		}
+
+		div.citation {
+			font-size: 0.95em;
+			background-color: #fff;
+			padding: 10px;
+			height: auto;
+		}
+
+		ol.tight-list {
+			margin-top: 0;
+			padding-left: 1.4em;
+		}
+
+		ol.tight-list li {
+			margin-bottom: 0.4em;
+		}
+
+		table.data-table {
+			border-collapse: collapse;
+			width: 100%;
+			font-size: 0.9em;
+		}
+
+		table.data-table th,
+		table.data-table td {
+			border: 1px solid #DDD;
+			padding: 4px 6px;
+			text-align: center;
+		}
+
+		table.data-table thead th {
+			background-color: #f0f4ff;
+			font-weight: 600;
+		}
+	</style>
+
+	<title>Learning Interpretable Tremor Features using Supervised Learning</title>
+	<meta property="og:title" content="Learning Interpretable Tremor Features using Supervised Learning" />
+	<meta charset="UTF-8">
+</head>
+
+<body>
+
+	<!-- HEADER -->
+	<div class="content-margin-container">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+			<table class="header" align="left">
+				<tr>
+					<td colspan="4">
+						<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace;">
+							Learning Interpretable Tremor Features using Supervised Learning
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="padding-top:6px;">
+						<span style="font-size:17px;">
+							Caleb Adams &amp; Willem Van Osselaer
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="left">
+						<span style="font-size:18px">Final project for 6.7960, MIT</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- TOP IMAGE (OPTIONAL PLACEHOLDER) -->
+	<div class="content-margin-container" id="intro">
+		<div class="margin-left-block">
+			<!-- table of contents here -->
+			<div style="position:fixed; max-width:inherit; top:max(20%,120px)">
+				<b style="font-size:16px">Outline</b><br><br>
+				<a href="#intro">Introduction &amp; motivation</a><br><br>
+				<a href="#prior-work">Prior work &amp; background</a><br><br>
+				<a href="#methods">Experimental methods</a><br><br>
+				<a href="#analysis">Analysis</a><br><br>
+				<a href="#discussion">Discussion &amp; future work</a><br><br>
+				<a href="#conclusion">Conclusion</a><br><br>
+				<a href="#citations">References</a><br><br>
+			</div>
+		</div>
+		<div class="main-content-block">
+			<!-- hero image if you want one -->
+			<!-- <img src="./images/your_image_here.png" width="512" alt="Hero image"/> -->
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- INTRODUCTION -->
+	<div class="content-margin-container">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+			<h1>Introduction and motivation</h1>
+
+			<p>
+				Parkinson&rsquo;s disease (PD) is a neurological disorder attributed to the loss of the
+				brain&rsquo;s ability to produce dopamine, leading to severe and progressively worsening
+				mental and physical symptoms
+				[<a href="#ref1">1</a>, <a href="#ref2">2</a>]. Tremors are one of the first symptoms to
+				develop and have a significant impact on a patient&rsquo;s quality of life, inhibiting
+				their ability to perform many tasks of daily living.
+			</p>
+
+			<p>
+				Moreover, due to their relatively early onset, tremors play a vital role in diagnosing
+				PD in its early stages. However, tremor presentation varies widely among individuals
+				with different disease durations and during different tasks. This makes it challenging
+				to develop characteristic features to help with disease classification
+				[<a href="#ref2">2</a>].
+			</p>
+
+			<p>
+				This project is part of a broader initiative at MIT to develop a self-stabilising pen
+				that helps patients with Parkinson&rsquo;s effectively write and sketch. Unlike traditional
+				machine learning approaches for tremor data, this pen will not rely on any prior
+				knowledge about the action being performed or on control data from healthy individuals.
+				As a result, features must be developed that are invariant to the specific action,
+				ensuring the pen can suppress the tremor effectively.
+			</p>
+
+			<p>
+				It is also important for these tremor characteristics to be human interpretable, especially
+				in situations where decision outcomes have a major impact on patients&rsquo; quality of life.
+				As such, our project aims to learn human-interpretable, action-invariant features inherent
+				to Parkinson&rsquo;s tremors from time series data.
+			</p>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+	<!-- PRIOR WORK -->
+	<div class="content-margin-container" id="prior-work">
+		<div class="margin-left-block"></div>
+		<div class="main-content-block">
+			<h1>Prior work and background</h1>
+
+			<p>
+				Using sensor-based handwriting analysis for PD diagnosis is well established in the
+				literature [<a href="#ref3">3</a>&ndash;<a href="#ref6">6</a>].
+				These methods have been developed significantly in recent years, and improvements in
+				state-of-the-art models have been based around improving both classical machine learning
+				and deep learning approaches to data analysis
+				[<a href="#ref7">7</a>].
+			</p>
+
+			<h2>Classical machine learning</h2>
+
+			<p>
+				Classical machine learning techniques provide highly transparent but manual methods of
+				classifying tremor data. Work in this space extracts key features, such as amplitude,
+				maximum frequency, and standard deviation, from time series data and then uses these
+				features for classification [<a href="#ref8">8</a>]. Research here aims to discover new
+				and important features from the data that can be extracted and provide high discriminative
+				ability for the classification models. Work such as that by Lu et&nbsp;al. (2025),
+				where it was proposed that features be combined in a multimodal way to detect correlations
+				between data streams, and Mucha et&nbsp;al. (2018), in which fractional order derivatives
+				were used to extract key features, both achieved accuracies up to 97.95&nbsp;% and
+				89.81&nbsp;% respectively and are notable for their contributions to improving classification
+				accuracy in tremor detection
+				[<a href="#ref5">5</a>, <a href="#ref6">6</a>].
+			</p>
+
+			<p>
+				This research has achieved high levels of discriminative ability; however, it relies on a
+				manual feature development process that requires substantial time and domain-specific
+				knowledge. Moreover, the feature learning approach cannot easily be adapted to new datasets,
+				data collection modalities, or new diseases, which limits the scalability of this work.
+				Hence, we aim to derive human-interpretable characteristics and draw novel insights without
+				<em>a&nbsp;priori</em> assumptions about features.
+			</p>
+
+			<h2>Deep learning</h2>
+
+			<p>
+				Deep learning approaches address the limitations of classical approaches by providing a
+				pipeline for classification that is independent of disease type and clinician knowledge.
+				Deep learning approaches take normalised data as input, process it without manual feature
+				extraction, and output a classification. Work in this space has focused on black-box learning
+				approaches such as Alissa et&nbsp;al. (2022), which achieved 93.5&nbsp;% accuracy in
+				classifying between PD and control patients with a convolutional neural network (CNN) model
+				trained on time series data gathered by an inertial measurement unit (IMU)
+				[<a href="#ref9">9</a>].
+			</p>
+
+			<p>
+				A recent review demonstrated that deep learning research for time series classification
+				tasks for PD and medical data more broadly has revolved around developing hybrid deep
+				learning models that integrate multimodal data (time series, imaging, etc.) and
+				fine-tuning architectures to achieve better accuracies on harder datasets
+				[<a href="#ref7">7</a>]. However, these research directions, despite achieving high
+				predictive accuracy, are hard for clinicians to adopt because they are not transparent
+				in how they arrive at diagnoses.
+			</p>
+
+			<h2>Contrastive learning</h2>
+
+			<p>
+				To address this concern, recent work has used unsupervised learning models to classify
+				disease states [<a href="#ref10">10</a>]. Beyond classification, unsupervised learning
+				allows us to extract features from data that were not previously thought relevant to the
+				disease and that can assist both in disease classification and in developing our
+				understanding of disease characteristics.
+			</p>
+
+			<p>
+				One unsupervised learning approach that has achieved high levels of accuracy is the
+				Time-Series representation learning framework via Temporal and Contextual Contrasting
+				(TS-TCC) [<a href="#ref10">10</a>], which achieves between 83&nbsp;% and 97&nbsp;%
+				accuracy across a range of time series datasets from individuals with a range of diseases.
+				This work is particularly interesting because it draws from
+				[<a href="#ref11">11</a>&ndash;<a href="#ref13">13</a>], which showed that image-based
+				contrastive learning methods do not translate well to time series data, and that contrastive
+				learning can learn invariant representations of the data effectively. From this, the new
+				TS-TCC contrastive learning method was developed to have a flexible structure that can
+				be adapted to novel data types, includes time-series-relevant augmentations, and poses a
+				tough temporal contrasting objective that forces the model to learn strong representations
+				of the data.
+			</p>
+
+			<p>
+				However, despite the high accuracy of this model and its extensions through CA-TCC and
+				related works [<a href="#ref14">14</a>], the learned features of the model have not been
+				thoroughly explored. These works focus mainly on developing high-accuracy temporal
+				contrasting models without examining the embedding space, which is critical for translating
+				the work into a clinical setting. We adopt the TS-TCC framework with the goal of learning
+				an embedding space that is meaningful and interpretable, while preserving high accuracy
+				at diagnosing Parkinson&rsquo;s disease.
+			</p>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+	<!-- METHODS -->
+	<div class="content-margin-container" id="methods">
+		<div class="margin-left-block"></div>
+		<div class="main-content-block">
+			<h1>Experimental methods</h1>
+
+			<h2>Data</h2>
+
+			<p>
+				We work with a clinical dataset containing time series of angular velocity and linear
+				acceleration of a pen used for six standardised writing tests, for 20 participants with
+				and 20 without Parkinson&rsquo;s disease
+				[<a href="#ref8">8</a>]. The dataset contains over 9.75&nbsp;million data points
+				across six input channels. The duration of the test and pen orientation are not
+				standardised, which means that correlations between different data channels will be
+				incredibly important.
+			</p>
+
+			<h2>The model</h2>
+
+			<p>
+				For this project, we use the TS-TCC model proposed by Eldele et&nbsp;al.
+				[<a href="#ref14">14</a>]. This model takes as input the six-channel time series
+				data split into patches of length 128
+				[<a href="#ref8">8</a>]. The model outputs a binary classification of the input data as
+				either PD or not.
+			</p>
+
+			<p>
+				The TS-TCC model works by taking as input a segment of the time series data. This segment
+				(patch) is then passed through a strong and a weak augmentation. The strong augmentation
+				divides the segment into a predetermined number of sub-segments, randomly permutes these,
+				concatenates them back together, and applies a random jitter (small additive amplitude
+				change) to each data point in the segment. The weak augmentation simply scales each data
+				point by a factor. These augmented representations are then fed into an encoder, which
+				outputs a latent representation \(\mathbf{z}\). This latent representation is then
+				summarised into a context vector \(\mathbf{c}\) by a transformer head (there is one
+				context vector for each augmentation).
+			</p>
+
+			<p>
+				To predict future time steps, a log-bilinear model is used that preserves mutual information
+				between the inputs \(x_{t+k}\) and \(c_t\), such that
+				\[
+				f_k(x_{t+k}, c_t) = \exp\big((W_k(c_t))^\top z_{t+k}\big).
+				\]
+				The augmented context vectors \(c_t^s\) and \(c_t^w\) are then used to calculate the temporal
+				contrasting losses:
+			</p>
+
+			<p style="text-align:center;">
+				\[
+				\forall y \in \{w,s\},\quad
+				\mathcal{L}_{\mathrm{TC}}^{s}
+				= - \frac{1}{K} \sum_{k=1}^{K}
+				\log \frac{
+				\exp\big( ( W_k(c_i^{s}) )^\top z^{w}_{i+k} \big)
+				}{
+				\sum_{n \in \mathcal{N}_{t,k}}
+				\exp\big( ( W_k(c_i^{s}) )^\top z^{w}_{n} \big)
+				}.
+				\]
+			</p>
+
+			<p>
+				These representation vectors \(\mathbf{c}\) are then projected through a non-linear head to a
+				space where contextual contrasting is applied. For a batch size of \(N\), there are two
+				context vectors per sample, so \(2N\) contexts in total. The two augmented views of each
+				sample form a positive pair, and the remaining \(2N-2\) contexts serve as negative samples.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/TS-TCC_Model_Diagram.png" alt="Overall architecture of the TS-TCC model"
+					style="max-width:75%;">
+				<div style="font-size:0.9em;">
+					Figure 1: Overall architecture of the TS-TCC model, adapted from Eldele et&nbsp;al.
+					[<a href="#ref10">10</a>].
+				</div>
+			</div>
+
+			<p>
+				A combined loss function is then calculated:
+			</p>
+
+			<p style="text-align:center;">
+				\[
+				\mathcal{L}
+				= \lambda_1 \big( \mathcal{L}_{\mathrm{TC}}^{s}
+				+ \mathcal{L}_{\mathrm{TC}}^{w} \big)
+				+ \lambda_2 \mathcal{L}_{\mathrm{CC}},
+				\]
+			</p>
+
+			<p>
+				where the parameters \(\lambda_1\) and \(\lambda_2\) are tuned and set to 1 and 0.7,
+				respectively. After contrastive learning has been completed, the TS-TCC encoder is frozen
+				and a linear classification head is trained on top for PD vs control classification.
+			</p>
+
+			<h2>Analysis process</h2>
+
+			<h3>1.&nbsp;Data pre-processing</h3>
+
+			<p>
+				We first z-score normalise our data for each unique test, channel, and patient:
+			</p>
+
+			<p style="text-align:center;">
+				\[
+				x_{\text{norm}} =
+				\frac{x_i - \mu_x}{\sigma_x}.
+				\]
+			</p>
+
+			<p>
+				The data is then split into patches of size \(p\) and divided into training, validation,
+				and test sets at a ratio of 0.6, 0.2, 0.2, respectively. Splitting is done so that there is
+				an even balance of PD and control patches in each set.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/Untitled.png" alt="Raw and normalised IMU data example">
+				<div style="font-size:0.9em;">
+					Figure 2: (Left) Raw IMU data for a PD-classified patch of length 128.
+					(Right) Normalised IMU data for the same patch.
+				</div>
+			</div>
+
+			<h3>2.&nbsp;Fine-tuning</h3>
+
+			<p>
+				We tune the number of epochs, batch size, augmentation parameters, patch length,
+				feature length, and output channel size. Note that feature length and output channels
+				together determine the size of the embedding space and the dimensionality of the input to
+				the linear classification head. For each parameter that we fine-tune, we keep all other
+				parameters constant and perform a parameter sweep over different values of that
+				hyperparameter with a fixed random seed. Because TS-TCC is trained in an unsupervised
+				fashion, we use the linear-head test accuracy as a proxy for the usefulness of the learned
+				feature representations.
+			</p>
+
+			<p>
+				After tuning, we choose the Adam optimiser with parameters
+				\(\beta_1 = 0.9\), \(\beta_2 = 0.99\), and
+				learning rate \(lr = 3\times10^{-4}\).
+			</p>
+
+			<p>
+				The number of epochs is set to 30. We observe that we obtain comparable accuracy with
+				30 epochs as with higher values, and because compute cost grows roughly linearly with
+				the number of epochs, we select the smallest value that achieves the highest relative
+				accuracy.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/EpochsClassificationMetrics.png" alt="Accuracy metrics for different epoch values"
+					style="max-width:75%;">
+				<div style="font-size:0.9em;">
+					Figure 3: Accuracy metrics for the TS-TCC model with a linear classification head for
+					epoch values 20, 30, 40, 50, 60, 70, and 80.
+				</div>
+			</div>
+
+			<p>
+				Batch size is set to 128 and patch size to 32, as this combination balances compute time
+				and accuracy. Feature length and output channels are set to 16 and 64 respectively, as
+				they offer the highest accuracy with minimal increase in compute cost.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/FeatureLengthOutputChannels.png"
+					alt="Loss surface for feature length and output channels" style="max-width:75%;">
+				<div style="font-size:0.9em;">
+					Figure 4: Loss surface of a parameter sweep over feature length and output channel
+					parameters. Accuracy increases with output channels while remaining mostly invariant
+					to feature length.
+				</div>
+			</div>
+
+			<h3>3.&nbsp;Latent space analysis</h3>
+
+			<p>
+				Once the optimal model parameters are selected, we investigate the learned features in
+				two ways:
+			</p>
+
+			<ol class="tight-list">
+				<li>
+					<strong>Comparison of learned features to manual features.</strong>
+					We use a small model to evaluate the learned features and compare them to manual
+					features used in other literature.
+				</li>
+				<li>
+					<strong>New feature exploration.</strong>
+					We systematically investigate the features of a larger model for
+					human-interpretable characteristics.
+				</li>
+			</ol>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+	<!-- ANALYSIS -->
+	<div class="content-margin-container" id="analysis">
+		<div class="margin-left-block"></div>
+		<div class="main-content-block">
+			<h1>Analysis</h1>
+
+			<h2>Similarities between learned and manual features</h2>
+
+			<p>
+				To develop our understanding of how TS-TCC creates its embedding space, we start by
+				comparing learned features to manual features such as kurtosis, amplitude, and
+				zero-crossings that are common in the supervised learning literature on tremor data.
+			</p>
+
+			<p>
+				For simplicity, we examine an embedding space with just two output channels, each with
+				12 latent variables. For each of the 24 latent variables (number of channels times
+				feature length), we calculate the correlation to eight manual features computed on all
+				six input channels.
+			</p>
+
+			<p>
+				Figure 5 shows the correlations for the X-acceleration input channel and the eight manual
+				features. There appears to be little variation within the same channel, but across
+				channels we see distinct differences. The first channel correlates most strongly with the
+				minimum and maximum, indicating that it captures information about the intensity of the
+				amplitudes. The number of zero-crossings (a proxy for frequency) also correlates with
+				this channel. The second channel correlates with the measures of central tendency:
+				median, mode, and trimmed mean (the mean after removing the 15&nbsp;% most extreme
+				values). These observations look similar for the other input channels
+				(Y-acceleration, Z-acceleration, etc.).
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/AcX_twoChannels.png"
+					alt="Correlations between manual features and learned features: two channels">
+				<div style="font-size:0.9em;">
+					Figure 5: Correlations between manual features on input channel X-acceleration and
+					learned features in an embedding space with two channels of length 12.
+				</div>
+			</div>
+
+			<p>
+				When increasing to four output channels, we again see channels encode either amplitude
+				or centre, except that these observations are no longer invariant across input channels.
+				For X-acceleration, the first embedding channel is the one that encodes information about
+				the measures of central tendency (Figure&nbsp;6). For Y-acceleration, however, it is now
+				the second channel that correlates with the measures of central tendency
+				(Figure&nbsp;7). The output channels still capture similar information as in the smaller
+				model, but with the added capacity they can discriminate between different input channels.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/AcX_fourChannels.png" alt="Correlations for X-acceleration with four channels">
+				<div style="font-size:0.9em;">
+					Figure 6: Correlations between manual features on input channel X-acceleration and
+					learned features in an embedding space with four channels of length 12.
+				</div>
+			</div>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/AcY_fourChannels.png" alt="Correlations for Y-acceleration with four channels">
+				<div style="font-size:0.9em;">
+					Figure 7: Correlations between manual features on input channel Y-acceleration and
+					learned features in an embedding space with four channels of length 12.
+				</div>
+			</div>
+
+			<p>
+				Although these observations do not directly reveal novel features, using manual features
+				to interpret the latent space produced by these smaller models provides promise that our
+				TS-TCC model will also create a meaningful latent space in the higher dimensions that we
+				ultimately care about.
+			</p>
+
+			<h2>Novel feature exploration</h2>
+
+			<p>
+				We now extend this analysis to larger architectures. Our highest performing model uses
+				512 output channels and achieves an accuracy of 86.06&nbsp;%, whereas a substantially
+				smaller model with 64 output channels achieves a comparable accuracy of 83.03&nbsp;%.
+				Given an embedding feature length of 16, the linear classification head contains
+				\(512 \times 16 = 8192\) learnable parameters in the larger model, compared to only
+				\(64 \times 16 = 1024\) in the smaller model. Despite this significant difference in
+				dimensional capacity, the performance gap remains modest, suggesting that the higher
+				accuracy of the 512-channel model is correlated with its ability to distribute samples
+				across a much higher-dimensional embedding space rather than learning substantially
+				richer individual features.
+			</p>
+
+			<p>
+				This behaviour is illustrated in Table&nbsp;1, which presents the five highest-weighted
+				latent variables in the linear head for each model, together with the values of each
+				latent variable at the 1st, 20th, 40th, 60th, 80th, and 100th percentiles of the
+				embedding distribution. In the 512-channel model, most top-ranked features exhibit
+				zero or near-zero values across large portions of their distributions, indicating a
+				sparse allocation of information across many latent dimensions. In contrast, the
+				64-channel model demonstrates greater range within individual features, suggesting that
+				informative structure is concentrated into fewer and more directly interpretable
+				embeddings. This reduced redundancy and clearer feature usage motivate our decision to
+				use the 64-channel model for subsequent embedding analysis.
+			</p>
+
+			<div style="margin-top:10px; margin-bottom:10px;">
+				<table class="data-table">
+					<caption style="caption-side:top; text-align:left; font-weight:bold; margin-bottom:4px;">
+						Table 1: Side-by-side comparison of percentile values for the top five ranked
+						embedding features for a feature length of 16 with output channels of 512 and 64.
+					</caption>
+					<thead>
+						<tr>
+							<th colspan="8">Out channels = 512</th>
+							<th colspan="8">Out channels = 64</th>
+						</tr>
+						<tr>
+							<th>Rank</th>
+							<th>Feature</th>
+							<th>P1</th>
+							<th>P20</th>
+							<th>P40</th>
+							<th>P60</th>
+							<th>P80</th>
+							<th>P100</th>
+							<th>Rank</th>
+							<th>Feature</th>
+							<th>P1</th>
+							<th>P20</th>
+							<th>P40</th>
+							<th>P60</th>
+							<th>P80</th>
+							<th>P100</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>5824</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.4998</td>
+							<td>1</td>
+							<td>406</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.1506</td>
+							<td>0.4125</td>
+							<td>0.9706</td>
+							<td>3.0671</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>544</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>1.0110</td>
+							<td>2</td>
+							<td>411</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.1380</td>
+							<td>0.4277</td>
+							<td>0.9500</td>
+							<td>3.3827</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>7824</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0534</td>
+							<td>3</td>
+							<td>977</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.1048</td>
+							<td>0.2693</td>
+							<td>0.4647</td>
+							<td>0.8704</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>2401</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0244</td>
+							<td>0.6130</td>
+							<td>4</td>
+							<td>408</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.1565</td>
+							<td>0.4181</td>
+							<td>0.9699</td>
+							<td>3.4517</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>4016</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.1436</td>
+							<td>5</td>
+							<td>479</td>
+							<td>0.0000</td>
+							<td>0.0000</td>
+							<td>0.0250</td>
+							<td>0.1569</td>
+							<td>0.3463</td>
+							<td>1.0710</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<p>
+				As an example, we examine the latent variable that has the largest impact on Parkinson&rsquo;s
+				classification in our 64-output-channel model, as indicated by its weight in the linear
+				classification head. This model is chosen because it has relatively high accuracy while
+				avoiding overfitting. Figure&nbsp;8 shows the four patches with the highest value for this
+				most predictive latent variable, compared to four randomly sampled patches as a control.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/latentVar_360.png" alt="Patches for most predictive latent variable vs random patches">
+				<div style="font-size:0.9em;">
+					Figure 8: (Top) Four patches with the highest value for the most predictive latent
+					variable. (Bottom) Four control patches sampled randomly. Each colour represents a
+					different input channel.
+				</div>
+			</div>
+
+			<p>
+				These top four patches share a strong commonality. Not only do they have high amplitudes
+				across each input channel, but the amplitudes also decrease over time.
+			</p>
+
+			<p>
+				We can formalise this observation into a human-interpretable metric by defining a simple
+				function. We take the difference of the average amplitude in the first and second halves
+				of a patch and refer to this as the <em>amplitude difference score</em>. The 100 patches
+				with the highest value of our most predictive latent variable have an average amplitude
+				difference score of 0.71, whereas the average score across all patches is just 0.18, a
+				difference of well over half a standard deviation. Analyses like this form a starting
+				point for a deeper understanding of individual latent variables and what they may reveal
+				about Parkinsonian tremors.
+			</p>
+
+			<p>
+				To systematise this feature search process and to enable search for novel characteristics,
+				we plot the top five most important embedding features for classification, as defined by
+				their weights in the linear classification head. In Figure&nbsp;9, one can qualitatively
+				observe patterns in the time-series trajectories of samples drawn from percentiles with
+				non-zero activation values.
+			</p>
+
+			<p>
+				By comparison with the percentile statistics in Table&nbsp;1, steep changes in embedding
+				magnitude correspond to visibly increased variation within the plotted samples. For
+				example, for Feature 408, the jump from 0.9699 at P80 to 3.4517 at P100 is reflected by a
+				marked increase in signal variability in Figure&nbsp;9. Similar effects are observed for
+				other features, such as Feature 411, which appears to exhibit increasingly sinusoidal
+				motion as its embedding strength increases.
+			</p>
+
+			<p>
+				Finally, the top five features shown demonstrate strong discriminative ability, evident
+				from the consistent colour separation across samples for non-zero embedding values, with
+				purple trajectories corresponding to control participants and yellow trajectories
+				corresponding to PD participants.
+			</p>
+
+			<div style="text-align:center; margin-top:16px; margin-bottom:10px;">
+				<img src="images/Out52Feat16_real.png" alt="Top-5 predictive features for 64-channel model">
+				<div style="font-size:0.9em;">
+					Figure 9: Example plots of samples that scored highly (100th percentile) and poorly
+					(1st percentile) for the five most predictive features of the linear classifier for the
+					model with feature length 16 and 64 output channels. Purple curves are control
+					participants, yellow curves are PD participants.
+				</div>
+			</div>
+
+			<p>
+				Overall, this analysis demonstrates that human-interpretable features &mdash; novel or
+				otherwise &mdash; can be explored through the latent space of a deep learning model that
+				achieves high accuracy on a challenging clinical dataset.
+			</p>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+	<!-- DISCUSSION -->
+	<div class="content-margin-container" id="discussion">
+		<div class="margin-left-block"></div>
+		<div class="main-content-block">
+			<h1>Discussion and future work</h1>
+
+			<p>
+				We have encoded Parkinson&rsquo;s tremor data into a latent space that shows great promise
+				in providing novel, human-interpretable, and action-invariant feature representations.
+				However, further work is needed to make this approach more generalisable and robust.
+			</p>
+
+			<h2>Data</h2>
+
+			<p>
+				Increasing the size and breadth of our data would assist in improving both accuracy and
+				the quality of the embedding space. Our dataset consists of just six different
+				in-lab tasks with six input channels. This is far from sufficient to capture the full
+				range of actions that someone may perform with a pen in daily life. To achieve true
+				action invariance, we will need to collect data from a much wider distribution of actions,
+				especially actions outside the lab and over longer time periods.
+			</p>
+
+			<p>
+				Additionally, our data does not contain detailed information about patients&rsquo; disease
+				states. Because PD motor symptoms worsen over time, it would be valuable to classify
+				patients into early, middle, or late disease phases. Such labels would support finer-grained
+				classification and monitoring of disease progression, rather than the crude binary
+				classification task considered here.
+			</p>
+
+			<h2>Feature analysis</h2>
+
+			<p>
+				Systematic evaluation of the latent space is critical for understanding the learned
+				embeddings. Our initial observations of a small number of latent variables serve as a
+				proof of concept that human-interpretable meaning can be drawn from the embedding space.
+				However, a much more extensive analysis is required to achieve a deeper understanding of
+				Parkinsonian tremors.
+			</p>
+
+			<h2>Augmentations</h2>
+
+			<p>
+				Another crucial direction to improve this work is to study data augmentations. In
+				contrastive learning, augmentations directly define the invariances that the model is
+				encouraged to develop. To progress our goal of building an action-invariant model, we must
+				explore augmentation strategies beyond permutation, jitter, and simple scaling, such as
+				rotation, masking, and window warping
+				[<a href="#ref14">14</a>, <a href="#ref15">15</a>]. Iwana and Uchida
+				[<a href="#ref15">15</a>] provide extensive inspiration on creative augmentations that
+				achieve robust invariances. Understanding these invariances and how they affect the latent
+				space may also help in discovering novel features.
+			</p>
+
+			<h2>Architectures</h2>
+
+			<p>
+				TS-TCC is one of the state-of-the-art contrastive learning models for time series data
+				and has a strong track record across a variety of real-world tasks, making it an
+				outstanding starting point for our project. Nonetheless, it is far from the only option
+				available. There is ample opportunity to experiment with alternative architectures or
+				even design a bespoke model tailored specifically to handwriting tremor analysis
+				[<a href="#ref10">10</a>, <a href="#ref14">14</a>].
+			</p>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+	<!-- CONCLUSION -->
+	<div class="content-margin-container" id="conclusion">
+		<div class="margin-left-block"></div>
+		<div class="main-content-block">
+			<h1>Conclusion</h1>
+
+			<p>
+				We used a time-series contrastive learning model to classify inertial measurement data
+				according to patient disease state. The model was systematically fine-tuned for our
+				dataset, achieving a best test accuracy of 83.03&nbsp;% using a compact and highly
+				discriminative representation. Examination of the learned feature space shows strong
+				potential for extracting novel, human-interpretable latent features from Parkinsonian
+				tremor data.
+			</p>
+
+			<p>
+				Overall, this proof-of-concept study demonstrates that contrastive learning provides a
+				viable approach for analysing previously unexplored clinical time series datasets. These
+				results motivate future efforts to explicitly connect learned representations with
+				established biomarkers, improve model generalisation on larger cohorts, and explore
+				deployment in clinical monitoring applications.
+			</p>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+	<!-- REFERENCES -->
+	<div class="content-margin-container" id="citations">
+		<div class="margin-left-block"></div>
+		<div class="main-content-block">
+			<div class="citation">
+				<span style="font-size:16px; font-weight:bold;">References:</span><br><br>
+
+				<p id="ref1">
+					[1] Yaqiang Li, Zhi Lv, Yulong Dai, Liuzhenxiong Yu, Lin Zhang, Kai Wang, and Panpan Hu.
+					The global, regional, and National burden of Parkinson&rsquo;s disease in 204 countries
+					and territories, 1990&ndash;2021: a systematic analysis for the global burden of disease
+					study 2021. <em>BMC Public Health</em>, 25(1):3047, September 2025.
+				</p>
+
+				<p id="ref2">
+					[2] Roger L. Albin. <em>Parkinson Disease</em>. Oxford University Press, New York,
+					first edition, August 2022.
+				</p>
+
+				<p id="ref3">
+					[3] Yingcong Huang, Kunal Chaturvedi, Al-Akhir Nayan, Mohammad Hesam Hesamian,
+					Ali Braytee, and Mukesh Prasad. Early Parkinson&rsquo;s disease diagnosis through
+					hand-drawn spiral and wave analysis using deep learning techniques.
+					<em>Information</em>, 15(4):220, April 2024.
+				</p>
+
+				<p id="ref4">
+					[4] Kamila Bia&#x142;ek, Anna Potulska-Chromik, Jacek Jakubowski, Monika Nojszewska,
+					and Anna Kostera-Pruszczyk. Analysis of handwriting for recognition of Parkinson&rsquo;s
+					disease: current state and new study. <em>Electronics</em>, 13(19):3962, October 2024.
+				</p>
+
+				<p id="ref5">
+					[5] Jan Mucha, Jiri Mekyska, Marcos Faundez-Zanuy, Karmele Lopez-De-Ipina,
+					Vojtech Zvoncak, Zoltan Galaz, Tomas Kiska, Zdenek Smekal, Lubos Brabenec,
+					and Irena Rektorova. Advanced Parkinson&rsquo;s disease dysgraphia analysis based on
+					fractional derivatives of online handwriting. In
+					<em>2018 10th International Congress on Ultra Modern Telecommunications and
+						Control Systems and Workshops (ICUMT)</em>, pages 1&ndash;6, Moscow, Russia,
+					November 2018. IEEE.
+				</p>
+
+				<p id="ref6">
+					[6] Huimin Lu, Guolian Qi, Dalong Wu, Chenglin Lin, Songzhe Ma, Yingqi Shi,
+					and Han Xue. A novel feature extraction method based on dynamic handwriting for
+					Parkinson&rsquo;s disease detection. <em>PLOS ONE</em>, 20(1):e0318021, January 2025.
+				</p>
+
+				<p id="ref7">
+					[7] Md.&nbsp;Ariful Islam, Md.&nbsp;Ziaul Hasan Majumder, Md.&nbsp;Alomgeer Hussein,
+					Khondoker Murad Hossain, and Md.&nbsp;Sohel Miah. A review of machine learning and
+					deep learning algorithms for Parkinson&rsquo;s disease detection using handwriting and
+					voice datasets. <em>Heliyon</em>, 10(3):e25469, February 2024.
+				</p>
+
+				<p id="ref8">
+					[8] Eug&#xEA;nio Peixoto J&uacute;nior, Italo L.&nbsp;D. Delmiro, Naercio Magaia,
+					Fernanda M. Maia, Mohammad Mehedi Hassan, Victor Hugo C. Albuquerque, and
+					Giancarlo Fortino. Intelligent sensory pen for aiding in the diagnosis of Parkinson&rsquo;s
+					disease from dynamic handwriting analysis. <em>Sensors</em>, 20(20):5840,
+					October 2020.
+				</p>
+
+				<p id="ref9">
+					[9] Mohamad Alissa, Michael A. Lones, Jeremy Cosgrove, Jane E. Alty, Stuart Jamieson,
+					Stephen L. Smith, and Marta Vallejo. Parkinson&rsquo;s disease diagnosis using
+					convolutional neural networks and figure-copying tasks.
+					<em>Neural Computing and Applications</em>, 34(2):1433&ndash;1453, January 2022.
+				</p>
+
+				<p id="ref10">
+					[10] Emadeldeen Eldele, Mohamed Ragab, Zhenghua Chen, Min Wu, Chee Keong Kwoh,
+					Xiaoli Li, and Cuntai Guan. Time-series representation learning via temporal and
+					contextual contrasting. 2021. Version number: 1.
+				</p>
+
+				<p id="ref11">
+					[11] Jean-Yves Franceschi, Aymeric Dieuleveut, and Martin Jaggi. Unsupervised
+					scalable representation learning for multivariate time series. 2019. Publisher:
+					arXiv, version number: 4.
+				</p>
+
+				<p id="ref12">
+					[12] Mostafa Mohsenvand, Mohammad Rasool Izadi, and Pattie Maes. Contrastive
+					representation learning for electroencephalogram classification.
+					<em>Proceedings of Machine Learning Research</em>, 126:238&ndash;253, 2020.
+				</p>
+
+				<p id="ref13">
+					[13] Xinlei Chen and Kaiming He. Exploring simple Siamese representation learning,
+					2020. Version number: 1.
+				</p>
+
+				<p id="ref14">
+					[14] Emadeldeen Eldele, Mohamed Ragab, Zhenghua Chen, Min Wu, Chee-Keong Kwoh,
+					Xiaoli Li, and Cuntai Guan. Self-supervised contrastive representation learning for
+					semi-supervised time-series classification. 2022. Publisher: arXiv, version number: 3.
+				</p>
+
+				<p id="ref15">
+					[15] Brian Kenji Iwana and Seiichi Uchida. An empirical survey of data augmentation
+					for time series classification with neural networks. <em>PLOS ONE</em>,
+					16(7):e0254841, July 2021.
+				</p>
+			</div>
+		</div>
+		<div class="margin-right-block"></div>
+	</div>
+
+</body>
+
+</html>

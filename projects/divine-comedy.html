@@ -288,6 +288,9 @@
             LinkedIn
           </a>
         </li>
+        <li>
+          <a href="https://the77lab.mit.edu/" target="_blank" rel="noopener">Masters Lab Website</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -301,13 +304,13 @@
 
       <h2>Introduction</h2>
 
-      <p>This project started from a simple question: what would happen if you treated a 700-year-old poem like a complex system? Together with Dr Brown, I applied network analysis, some statistical analysis and entropy analysis to Dante Alighieri's <em>Divine Comedy</em>. Maths and engineering use these techniques more often than the humanities do, but they have interesting applications there too. The goal was to see whether they could show something useful about the structure of the text: how words relate to each other, how linguistically diverse and predictable the poem is, and how that varies across the canticles. The work sits inside the growing field of multilingual digital humanities scholarship, and we published the full paper in the ACM Journal on Computing and Cultural Heritage.</p>
+      <p>This project started from a simple question: what happens if you treat a 700 year old poem like a complex system? Together with Dr Brown, I applied network analysis, statistical analysis and entropy analysis to Dante Alighieri's <em>Divine Comedy</em>. The work sits inside multilingual digital humanities scholarship. We published the full paper in the ACM Journal on Computing and Cultural Heritage.</p>
 
       <p>I've made the codebase public on <a href="https://github.com/CalebA03/DivineComedyAsACompexSystem" target="_blank" rel="noopener">GitHub</a>. It's a Python pipeline that takes the raw Project Gutenberg text and applies our analysis methods to it.</p>
 
       <h2>Preprocessing</h2>
 
-      <p>The source text is the <em>Divina Commedia</em> from Project Gutenberg. Before touching the text, we tried to keep any alterations to a minimum. The results only mean something if the underlying text still does. So preprocessing was conservative. I split the poem into its three cantiche (Inferno, Purgatorio, Paradiso), stripped the canti headings, punctuation, and numbers, and lowercased everything. There was no lemmatisation. Modern Italian NLP tools target contemporary Italian, not Dante's 14th-century Florentine vernacular. Hence, running them over the text risked introducing more error. I handled stop-word removal the same way, with a small curated list alongside <a href="https://www.nltk.org/nltk_data/" target="_blank" rel="noopener">NLTK's generic Italian stopwords</a>. I chose this list to include many common filler words.</p>
+      <p>The source text is the <em>Divina Commedia</em> from Project Gutenberg. I kept preprocessing conservative to maintain the text's integrity. I split the poem into its three cantiche (Inferno, Purgatorio, Paradiso), stripped the canti headings, punctuation, and numbers, and lowercased everything. I skipped lemmatisation. Modern Italian NLP tools are built for contemporary Italian, not Dante's fourteenth century Florentine vernacular, and running them over the text would have introduced errors. I removed stop words by pairing a small curated list of common filler words such as 'il' and 'e' with <a href="https://www.nltk.org/nltk_data/" target="_blank" rel="noopener">NLTK's generic Italian stopwords</a>.</p>
 
       <h2>Network Analysis</h2>
 
@@ -350,7 +353,7 @@
         </table>
       </div>
 
-      <p>One result stood out: 'maestro' (teacher) tops all three centrality measures in Inferno, which tracks with Virgil's role as Dante's guide through hell. Its centrality then drops through Purgatorio and Paradiso as Virgil's narrative importance fades. The subgraph below is from Paradiso. The thematic shift shows up directly in the words clustered there: 'ciel' and 'luce' (sky and light) replace the earthbound 'terra' and 'gente' (earth and people) that dominate Purgatorio.</p>
+      <p>One result stood out. 'Maestro' (teacher) tops all three centrality measures in Inferno, which tracks with Virgil's role as Dante's guide through hell. Its centrality then drops through Purgatorio and Paradiso as Virgil's importance to the narrative fades. The subgraph below is from Paradiso, and the thematic shift shows up directly in the words clustered there: 'ciel' and 'luce' (sky and light) replace the earthbound 'terra' and 'gente' (earth and people) that dominate Purgatorio.</p>
 
       <div class="figure">
         <div class="figure__img">
@@ -361,7 +364,7 @@
 
       <h2>Statistical Analysis</h2>
 
-      <p>On the statistical side, I looked at word frequency against Zipf's law, which says a word's frequency should be roughly inversely proportional to its rank. A handful of words carry most of the text, and a long tail occurs once or twice. Dante's poem follows this closely in every cantica, with a consistent slope (&beta;) between &minus;0.89 and &minus;0.91. That consistency across three otherwise different sections of the poem is interesting on its own. The more telling number is how that &beta; compares to other Italian literature: earlier studies of modern Italian corpora put &beta; closer to &minus;0.95 to &minus;1.05. Dante's is noticeably higher, so his vocabulary is more varied than standard modern Italian. That fits what's known about the text: Dante wrote it in 14th-century Florentine vernacular, with looser grammatical rules, dialect words, and abbreviations a modern text wouldn't use.</p>
+      <p>On the statistical side, I looked at word frequency against Zipf's law, which says a word's frequency should be roughly inversely proportional to its rank. Dante's poem follows this closely in every cantica, with a consistent slope (&beta;) between &minus;0.89 and &minus;0.91. That consistency across three otherwise different sections of the poem is interesting on its own. The more telling number is how that &beta; compares to other Italian literature. Earlier studies of modern Italian corpora put &beta; closer to &minus;0.95 to &minus;1.05, noticeably lower than Dante's, which points to a more varied vocabulary than standard modern Italian. That fits what's known about the text: Dante wrote it in fourteenth century Florentine vernacular, with looser grammatical rules, dialect words, and abbreviations.</p>
 
       <div class="figure">
         <div class="figure__img">
@@ -374,7 +377,7 @@
 
       <p>The last method used Shannon entropy over bigrams (word pairs) to measure how predictable word order is, canto by canto. For each canto, I compared the entropy of the actual bigram sequence to the entropy of the same words shuffled into random order, averaged over five shuffles. This gives a relative entropy score: the bigger the gap, the more Dante's word order departs from randomness.</p>
 
-      <p>Paradiso's entropy runs higher on average than Inferno or Purgatorio, particularly in its final third. The plot below shows clear peaks around canti 25 and 30. These canti deal with Dante's most abstract theological visions, where word order carries more of the meaning and Dante constrains the language more tightly than in the surrounding canti.</p>
+      <p>Paradiso's entropy is higher on average than Inferno or Purgatorio, particularly in its final third. The plot below shows peaks around canti 25 and 30. These canti deal with Dante's most abstract theological visions, where word order carries more of the meaning and Dante constrains the language more tightly than in the surrounding canti.</p>
 
       <div class="figure">
         <div class="figure__img">
@@ -385,11 +388,11 @@
 
       <h2>Conclusion</h2>
 
-      <p>The three methods point the same way from different angles. Network analysis showed that key words such as 'maestro' in Inferno act as hubs in the word adjacency network, tying closely to Dante's narrative in each cantica. Statistical analysis confirmed the poem follows a Zipfian distribution and showed a higher level of linguistic diversity than modern standard Italian, so Dante's lexicon is both rich and complex. Entropy analysis picked up real variation in word ordering between canti. In Inferno, entropy peaks around canto 25, where the thieves in the Eighth Circle shift between human and serpent form in a tightly structured sequence, and troughs around canto 24, a more dialogue-driven canto where Virgil's exclamations keep introducing new word combinations. As far as we can tell, we are the first to apply network analysis to the poem, and the first to treat Dante's work as a Complex System at all.</p>
+      <p>Network analysis showed that key words such as 'maestro' in Inferno act as hubs in the word adjacency network, tying closely to Dante's narrative in each cantica. Statistical analysis confirmed the poem follows a Zipfian distribution with a higher level of linguistic diversity than modern standard Italian: Dante's lexicon is rich and complex.</p>
 
-      <p>The approach has real limitations. Reducing the poem to word adjacency loses context. It cannot see how characters, themes, and motifs interact across a whole canto or cantica, only across a handful of neighbouring words. Removing stop-words carries a similar cost. Words such as 'il' and 'e' carry little meaning on their own, and stripping them out risks losing some of the syntactic rhythm that holds the poem together. There is also no standard preprocessing pipeline for medieval Italian text. Different studies tokenise, lemmatise, and handle punctuation differently, which makes it hard to compare results across papers.</p>
+      <p>Reducing the poem to a word adjacency network loses context. It cannot see how characters, themes, and motifs interact across a whole canto or cantica, only across a handful of neighbouring words. Removing stop-words carries a similar cost. Words such as 'il' and 'e' carry little meaning on their own, and stripping them out risks losing some of the syntactic rhythm that holds the poem together. There is also no standard preprocessing pipeline for medieval Italian text. Different studies tokenise, lemmatise, and handle punctuation differently, which makes it hard to compare results across papers.</p>
 
-      <p>None of this replaces a close reading of the text. It offers a different, quantitative way into it, and it is a reminder that Virgil's authority as Dante's guide shows up just as clearly in the word statistics as it does on the page.</p>
+      <p>None of this replaces a close reading of the text. It offers a different, quantitative way into it.</p>
 
       <h2>Paper</h2>
 
