@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<!-- MathJax for LaTeX-style math, with AMS automatic equation numbering -->
+	<script>
+		window.MathJax = {
+			tex: {
+				tags: 'ams',
+				packages: {'[+]': ['ams']}
+			}
+		};
+	</script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+	</script>
+
+	<style type="text/css">
+		body {
+			background-color: #f5f9ff;
+		}
+
+		.content-margin-container {
+			display: flex;
+			width: 100%;
+			justify-content: left;
+			align-items: flex-start;
+		}
+
+		.main-content-block {
+			width: 70%;
+			max-width: 1100px;
+			background-color: #fff;
+			border-left: 1px solid #DDD;
+			border-right: 1px solid #DDD;
+			padding: 8px 24px;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+				"Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+				sans-serif;
+			line-height: 1.55;
+		}
+
+		.margin-left-block {
+			font-size: 14px;
+			width: 15%;
+			max-width: 150px;
+			position: relative;
+			margin-left: 10px;
+			text-align: left;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+				"Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+				sans-serif;
+			padding: 5px;
+		}
+
+		.margin-right-block {
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+				"Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+				sans-serif;
+			font-size: 14px;
+			width: 25%;
+			max-width: 256px;
+			position: relative;
+			text-align: left;
+			padding: 10px;
+		}
+
+		img, embed.pdf-embed {
+			max-width: 100%;
+			height: auto;
+			display: block;
+			margin: auto;
+		}
+
+		a:link,
+		a:visited {
+			color: #0e7862;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #24b597;
+		}
+
+		h1 {
+			font-size: 20px;
+			margin-top: 16px;
+			margin-bottom: 10px;
+		}
+
+		h2 {
+			font-size: 18px;
+			margin-top: 22px;
+			margin-bottom: 6px;
+		}
+
+		h3 {
+			font-size: 16px;
+			margin-top: 16px;
+			margin-bottom: 4px;
+		}
+
+		h4 {
+			font-size: 14.5px;
+			margin-top: 14px;
+			margin-bottom: 4px;
+		}
+
+		table.header {
+			font-weight: 300;
+			font-size: 17px;
+			flex-grow: 1;
+			width: 70%;
+			max-width: calc(100% - 290px);
+		}
+
+		table td,
+		table td * {
+			vertical-align: middle;
+			position: relative;
+		}
+
+		hr {
+			height: 1px;
+			border: none;
+			background-color: #DDD;
+		}
+
+		ol.tight-list {
+			margin-top: 0;
+			padding-left: 1.4em;
+		}
+
+		ol.tight-list li {
+			margin-bottom: 0.4em;
+		}
+
+		table.data-table {
+			border-collapse: collapse;
+			width: 100%;
+			font-size: 0.9em;
+			margin: 1em 0;
+		}
+
+		table.data-table th,
+		table.data-table td {
+			border: 1px solid #DDD;
+			padding: 5px 8px;
+			text-align: left;
+			vertical-align: top;
+		}
+
+		table.data-table thead th {
+			background-color: #f0f4ff;
+			font-weight: 600;
+		}
+
+		figure {
+			margin: 1.25em 0;
+		}
+
+		figure.figure-row {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			align-items: flex-start;
+		}
+
+		figure.figure-row > div {
+			flex: 1 1 45%;
+			min-width: 220px;
+		}
+
+		figcaption {
+			font-size: 0.85em;
+			color: #555;
+			margin-top: 0.4em;
+			line-height: 1.4;
+			text-align: center;
+		}
+
+		.cite {
+			font-size: 0.85em;
+			vertical-align: super;
+			line-height: 1;
+		}
+
+		ol.references {
+			padding-left: 1.6em;
+			font-size: 0.92em;
+			line-height: 1.6;
+		}
+
+		ol.references li {
+			margin-bottom: 0.75em;
+		}
+
+		ol.references li:target {
+			background: #fff8d6;
+		}
+
+		.assumptions {
+			padding-left: 1.4em;
+		}
+
+		.assumptions li {
+			margin-bottom: 0.6em;
+		}
+
+		embed.pdf-embed {
+			width: 100%;
+			height: 900px;
+			border: 1px solid #DDD;
+		}
+
+		.pdf-fallback {
+			font-size: 0.9em;
+			margin-top: 0.5em;
+		}
+	</style>
+
+	<title>Designing Precision Flexures for Real-World Hardware</title>
+	<meta property="og:title" content="Designing Precision Flexures for Real-World Hardware" />
+	<meta charset="UTF-8">
+</head>
+
+<body>
+
+	<!-- HEADER -->
+	<div class="content-margin-container">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+			<table class="header" align="left">
+				<tr>
+					<td colspan="4">
+						<span style="font-size: 26px; font-family: 'Courier New', Courier, monospace;">
+							Designing Precision Flexures for Real-World Hardware
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="padding-top:6px;">
+						<span style="font-size:17px;">
+							Written by: Caleb Adams
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="left">
+						<span style="font-size:18px">18.345 Project, MIT</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- OUTLINE -->
+	<div class="content-margin-container" id="intro">
+		<div class="margin-left-block">
+			<div style="position:fixed; max-width:inherit; top:max(20%,120px)">
+				<b style="font-size:16px">Outline</b><br><br>
+				<a href="#intro">Introduction</a><br><br>
+				<a href="#problem">Problem definition</a><br><br>
+				<a href="#beam-derivation">Beam bending equations</a><br><br>
+				<a href="#results">Results</a><br><br>
+				<a href="#discussion">Discussion &amp; conclusion</a><br><br>
+				<a href="#appendix">Appendix</a><br><br>
+				<a href="#references">References</a><br><br>
+			</div>
+		</div>
+		<div class="main-content-block">
+
+			<h1>1. Introduction</h1>
+
+			<p>Lathes are a common machining tool and are used in a variety of contexts, from hobby machining to precision manufacturing (See Fig. 1) <a href="#ref-1" class="cite">[1]</a>. Within the design of a lathe, there are many machine elements that need precise modelling for the accurate function of the final machine, including the dancing queen, bearings, shaft, and many more besides <a href="#ref-1" class="cite">[1]</a>. One such critical element is the carriage rail flexure (CRF). This machine element is critical to the design and proper function of the lathe as it prevents over constraint of the carriage. As such, this must be modelled accurately to allow movement in certain degrees of freedom (DOF), such as &theta;<sub>z</sub>, whilst correcting for misalignment along the carriage rail, resisting fatigue failure, and maintaining sufficient stiffness in &#119910; <a href="#ref-2" class="cite">[2]</a>.</p>
+
+			<figure>
+				<img src="images/RealLathe.jpeg" alt="Lathe side view" style="max-width: 55%;" />
+				<figcaption>Figure 1. Lathe side view.</figcaption>
+			</figure>
+
+			<p>The CRF in this context refers to the blade flexure found on one side of the lathe that connects the carriage to the guide rail (See Fig. 2). On the other side of the lathe, the carriage is connected to the guide rods by two rigid guides. These linkages (on both sides) allow for the carriage to move linearly in the z-axis whilst maintaining high stiffness in all other DOFs (e.g. &theta;<sub>y</sub>). These linkages, connect to the guide rod through brass bushings which act as a sliding bearings that are designed to reduce wear and input torque required during the motion of the carriage.</p>
+
+			<figure>
+				<img src="images/CarriageCADv2.png" alt="Carriage assembly CAD" style="max-width: 55%;" />
+				<figcaption>Figure 2. Carriage assembly CAD. The carriage rail flexure connects the carriage to the guide rail through a bronze bearing.</figcaption>
+			</figure>
+
+			<p>There has been significant prior literature on the modelling and design of such flexures <a href="#ref-2" class="cite">[2]</a><a href="#ref-3" class="cite">[3]</a><a href="#ref-4" class="cite">[4]</a><a href="#ref-5" class="cite">[5]</a>. However, for the purposes of this project we will begin, not with a summary of the surrounding literature, but with a detailed description of the problem at hand. Then with a clear understanding of the problem, we will derive the relevant beam bending equations and internal stress relations from first principles using the relevant literature. From these equations we will have relationships between flexure thickness, stiffness, and internal stress state. This will allow us to determine the thickness of the flexure such that it is machinable and meets our design requirements.</p>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- PROBLEM DEFINITION -->
+	<div class="content-margin-container" id="problem">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+
+			<h1>2. Problem definition</h1>
+
+			<p>For the purpose of this assignment we must define a few important parameters. These parameters are; the forces and moments acting on the CRF, the constraint layout, and material properties. First, we define the material properties of the system. The CRF (and all other components considered) are made of Aluminium 6061 <a href="#ref-6" class="cite">[6]</a>. It's pertinent material properties are: &sigma;<sub>UTS</sub> = 310 MPa, &sigma;<sub>Y</sub> = 276 MPa, &sigma;<sub>fatigue</sub> = 96.5 MPa, E = 68.9 GPa, and &nu; = 0.33. Now we define the load case for the CRF using a free body diagram (FBD).</p>
+
+			<h2>2.1 Free body diagram</h2>
+
+			<p>To determine the forces and moments acting on the CRF, a free body diagram (FBD) of the carriage is constructed. The carriage experiences three cutting forces at the tool tip: \(F_\text{cut}\) acting in the \(-y\) direction, \(F_\text{tan}\) acting in the \(-x\) direction, and \(F_\text{axial}\) acting in the \(+z\) direction. These are resisted by the CRF and the two side skirt bushing interfaces, which provide radial reaction forces. It is assumed that any \(x\)-direction force seen by the CRF is negligible relative to the side skirts, which are far stiffer in that direction. The relevant geometry is defined by dimensions \(a\), \(b\), \(c\), \(d\), \(e\), and \(f\), described in Table 1 and illustrated in Fig. 3.</p>
+
+			<figure class="figure-row">
+				<div>
+					<img src="images/XYViewCarriagev2.png" alt="X-Y plane free body diagram of the lathe carriage" />
+					<figcaption>(a) X-Y plane free body diagram of the lathe carriage.</figcaption>
+				</div>
+				<div>
+					<img src="images/YZFBDCarriage.png" alt="Y-Z plane free body diagram of the lathe carriage" />
+					<figcaption>(b) Y-X plane free body diagram of the lathe carriage.</figcaption>
+				</div>
+				<figcaption style="flex-basis: 100%;">Figure 3. FBD of the lathe carriage.</figcaption>
+			</figure>
+
+			<table class="data-table">
+				<caption style="text-align:left; caption-side: top; font-size: 0.9em; margin-bottom: 6px;">Table 1. Geometric parameters for the carriage force analysis.</caption>
+				<thead>
+					<tr><th>Parameter</th><th>Description</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>\(a\)</td><td>Dovetail travel; \(x\)-distance of tool tip from left side skirt, \(a = \ell\theta / 2\pi\); \(0\leq a \leq 51\) mm</td></tr>
+					<tr><td>\(b\)</td><td>Remaining carriage span to right side skirt; \(b = (a+b)_\text{total} - a\)</td></tr>
+					<tr><td>\(c\)</td><td>Height of tool tip above guide rod centreline</td></tr>
+					<tr><td>\(d\)</td><td>\(z\)-distance from CRF to the nearest side skirt</td></tr>
+					<tr><td>\(e\)</td><td>\(z\)-distance between the two side skirts</td></tr>
+					<tr><td>\(f\)</td><td>Fixed \(x\)-offset of tool tip from dovetail centreline</td></tr>
+					<tr><td>\(\ell\)</td><td>Lead screw lead</td></tr>
+					<tr><td>\(\theta\)</td><td>Lead screw handle rotation, \(\theta \geq 0\)</td></tr>
+				</tbody>
+			</table>
+
+			<h2>2.2 Equilibrium equations</h2>
+
+			<p>Applying static equilibrium to the carriage (\(\sum F=m\frac{d^2x}{dt^2} = 0\)), the five equilibrium equations are as follows. Note that the z-direction force balance is omitted as that force is provided by the lead screw.</p>
+
+			\begin{align*}
+				\sum F_y &= 0=F_{y,1} + F_{y,2} + F_{y,\text{CRF}} - F_\text{cut} \\
+				\sum F_x &= 0=-F_{x,1} - F_{x,2} - F_\text{rad} \\
+				\sum M_x &= 0= -F_\text{cut}(f + d) + F_{y,\text{CRF}} \cdot d + F_{y,1} \cdot e + F_\text{axial} \cdot c \\
+				\sum M_y &= 0= F_{x,1} \cdot e + F_\text{rad}(d + f) - F_\text{axial} \cdot a \\
+				\sum M_{z,B} &= 0= F_{y,\text{CRF}}(a + b) - F_\text{cut} \cdot a + F_\text{axial} \cdot c
+			\end{align*}
+
+			<p>The system comprises five equations and five unknowns: \(F_{y,\text{CRF}}\), \(F_{y,1}\), \(F_{y,2}\), \(F_{x,1}\), and \(F_{x,2}\). Equation~(5) decouples, giving \(F_{y,\text{CRF}}\) without requiring the other unknowns:</p>
+
+			\begin{equation}
+				\boxed{F_{y,\text{CRF}} = \frac{F_\text{cut} \cdot a - F_\text{rad} \cdot c}{a + b}}
+				\label{eq:Fy_CRF}
+			\end{equation}
+
+			<h2>2.3 Derivation of x-direction forces</h2>
+
+			<p>See Appendix A.2 for full derivation. But using stiffness modelling the x-direction force can be nominally given by \(F_x=0.27\times F_{rad}\).</p>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- BEAM BENDING DERIVATION -->
+	<div class="content-margin-container" id="beam-derivation">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+
+			<h1>3. Derivation of beam bending equations</h1>
+
+			<p>A basic and complete derivation of Timoshenko beam bending can be found in Appendix A.1. The critical mathematical derivation is outlined below. The following assumptions are made during the derivation:</p>
+
+			<ol class="assumptions">
+				<li>The displacement components \(w_x\), \(w_y\), \(w_z\) \(\ll\) \(l\), and all rotation components \(\theta_x\), \(\theta_y\), \(\theta_z\) are very small. Thus, \(\sin\theta \approx \tan\theta \approx \theta\).</li>
+				<li>As deflections are small the Equations of Equilibrium (statics, \(F=ma=0\)) can be made in the undeformed state.</li>
+				<li>Cross-sections perpendicular to the \(x\)-axis at an arbitrary coordinate \(x_0\) remains plane and keeps its shape during deformation. This implies that it translates as a rigid body and no Poisson contraction.</li>
+				<li>The material deformation behaviour is assumed to be linear and hence follows Hooke's law with Young's modulus \(E\) and shear modulus \(G\).</li>
+				<li>The CRF has a rectangular cross-section, so the centroid, shear centre, and principal axes all coincide.</li>
+				<li>We are using the Timoshenko deformation model and hence shear deformation of the cross-section is included via shear correction factors \(\alpha_y\) and \(\alpha_z\), giving effective shear areas \(A_y = \alpha_y A\) and \(A_z = \alpha_z A\). These factors correct for the parabolic shear stress distribution that occurs in reality.</li>
+				<li>\(M_x\) and \(\frac{d\theta_x}{dx}\) are assumed to be zero and hence warping of the cross-section under torsion is neglected.</li>
+			</ol>
+
+			<h2>3.1 Equations of equilibrium</h2>
+
+			<p>This derivation draws heavily from the work of <a href="#ref-4" class="cite">[4]</a> as this isn't an entirely novel derivation rather a novel application. Consider a simple beam subject to an external distributed force vector \(\vec{f}(x)\) and an external distributed moment vector \(\vec{m}(x)\) per unit length. As a consequence, internal forces and moments arise in the cross section. See Fig. 4 for a visualisation of this.</p>
+
+			<figure>
+				<img src="images/BeamElement.jpeg" alt="Hand drawn diagram of a beam element" style="max-width: 55%;" />
+				<figcaption>Figure 4. Hand drawn diagram of a beam element with a length of \(dx\) and arbitrary forces and moments applied.</figcaption>
+			</figure>
+
+			<p>Applying force equilibrium and moment equilibrium to the beam element in Fig. 4 we get the following:</p>
+
+			\begin{align*}
+				-\vec{F} + \vec{F} + d\vec{F} + \vec{f}\,dx = 0
+				\quad &\Rightarrow \quad
+				\frac{d\vec{F}}{dx} + \vec{f} = 0, \\[6pt]
+				-\vec{M} + \vec{M} + d\vec{M}
+				+ \hat{i}\,dx \times (\vec{F} + d\vec{F})
+				+ \vec{m}\,dx = 0
+				\quad &\Rightarrow \quad
+				\frac{\partial \vec{M}}{\partial x}
+				+ \hat{i} \times \vec{F} + \vec{m} = 0.
+			\end{align*}
+
+			<p>The forces and moments are related to the stresses on the cross-section by integration over the cross-section:</p>
+
+			\begin{align*}
+				F_x &= \int_A \sigma_{xx}\,dA, \quad
+				F_y  = \int_A \sigma_{xy}\,dA, \quad
+				F_z  = \int_A \sigma_{xz}\,dA, \\[4pt]
+				M_x &= \int_A \!\left(\sigma_{xz}\,y - \sigma_{xy}\,z\right)dA,
+				\quad
+				M_y  = \int_A z\,\sigma_{xx}\,dA,
+				\quad
+				M_z  = -\!\int_A y\,\sigma_{xx}\,dA.
+			\end{align*}
+
+			<p>Where the stress state at a point on the beam is described by a symmetric positive definite stress tensor.</p>
+
+			\[
+				\boldsymbol{\sigma} =
+				\begin{bmatrix}
+					\sigma_{xx} & \sigma_{yx} & \sigma_{zx} \\
+					\sigma_{xy} & \sigma_{yy} & \sigma_{zy} \\
+					\sigma_{xz} & \sigma_{yz} & \sigma_{zz}
+				\end{bmatrix},
+			\]
+
+			<h2>3.2 Kinematics</h2>
+
+			<p>As with all rigid bodies, the deformed position of each beam cross-section is uniquely described by a translation and rotation vector: \(\vec{w}(x) = (w_x,\,w_y,\,w_z)^T\) and \(\vec{\theta}(x) = (\theta_x,\,\theta_y,\,\theta_z)^T\). The displacement of a point is thus:</p>
+
+			\begin{align*}
+				u_x(x,y,z) &= w_x + z\theta_y - y\theta_z, \\
+				u_y(x,y,z) &= w_y - z\theta_x, \\
+				u_z(x,y,z) &= w_z + y\theta_x.
+			\end{align*}
+
+			<h2>3.3 Strain displacement relations</h2>
+
+			<p>Differentiating the above relations gives us the three relevant strain relationships.</p>
+
+			\begin{align*}
+				\varepsilon_{xx}
+					&= \frac{\partial u_x}{\partial x}
+					 = \frac{\partial w_x}{\partial x}
+					   + z\frac{\partial\theta_y}{\partial x}
+					   - y\frac{\partial\theta_z}{\partial x},
+				\\[4pt]
+				\gamma_{xy}
+					&= \frac{\partial u_x}{\partial y}
+					 + \frac{\partial u_y}{\partial x}
+					 = \frac{\partial w_y}{\partial x} - \theta_z
+					   + \left(\frac{\partial\omega}{\partial y} - z\right)
+						 \frac{\partial\theta_x}{\partial x},
+				\\[4pt]
+				\gamma_{xz}
+					&= \frac{\partial u_x}{\partial z}
+					 + \frac{\partial u_z}{\partial x}
+					 = \frac{\partial w_z}{\partial x} + \theta_y
+					   + \left(\frac{\partial\omega}{\partial z} + y\right)
+						 \frac{\partial\theta_x}{\partial x},
+			\end{align*}
+
+			<p>where \(\omega(y,z)\) is the St. Venant warping function <a href="#ref-4" class="cite">[4]</a>, which appears for non-circular cross-sections under torsion. Note that we don't have any torsion in our case as per Assumption 7.</p>
+
+			<h2>3.4 Virtual Work Principle</h2>
+
+			<p>The internal virtual work per unit length of the beam is given by the below equation.</p>
+
+			\begin{equation}
+				\delta w = F\,\delta\varepsilon
+						 + F_y\,\delta\gamma_{y}
+						 + F_z\,\delta\gamma_{z}
+						 + M_y\,\delta\kappa_y
+						 + M_z\,\delta\kappa_z
+						 = \vec{\sigma}^T\,\delta\vec{\varepsilon},
+				\label{eq:virt_work}
+			\end{equation}
+
+			<p>Thus, the stress vector is \(\vec{\sigma} = (N,\,F_y,\,F_z,\,M_y,\,M_z)^T\) and the strain vector is:</p>
+
+			\begin{equation}
+				\vec{\varepsilon}(x) =
+				\begin{pmatrix}
+					\varepsilon \\[2pt]
+					\gamma_{y} \\[2pt]
+					\gamma_{z} \\[2pt]
+					\kappa_y   \\[2pt]
+					\kappa_z
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					\partial_x w_x \\[2pt]
+					\partial_x w_y - \theta_z \\[2pt]
+					\partial_x w_z + \theta_y \\[2pt]
+					\partial_x \theta_y \\[2pt]
+					\partial_x \theta_z
+				\end{pmatrix},
+				\label{eq:eps_vec}
+			\end{equation}
+
+			<p>Noting that \(\kappa_y\), \(\kappa_z\) are the bending curvatures about the \(y\)- and \(z\)-axes respectively. The curvature terms arise from the radius-of-curvature geometry of the deformed beam axis, as shown in Appendix A.3.</p>
+
+			<h2>3.5 Stress Resultant Integration</h2>
+
+			<p>Substituting the constitutive relations into the stress definitions gives six integrals:</p>
+
+			\begin{align*}
+				F   &= \int_A \sigma_{xx}\,dA
+					 = \int_A E\!\left(
+						   \partial_x w_x
+						   + z\,\partial_x\theta_y
+						   - y\,\partial_x\theta_z
+					   \right)dA,
+				\\[6pt]
+				F_y &= \int_A \sigma_{xy}\,dA
+					 = \int_A G\!\left(
+						   \partial_x w_y - \theta_z
+						   + \left(\partial_y\omega - z\right)
+							 \partial_x\theta_x
+					   \right)dA,
+			   \\[6pt]
+				F_z &= \int_A \sigma_{xz}\,dA
+					 = \int_A G\!\left(
+						   \partial_x w_z + \theta_y
+						   + \left(\partial_z\omega + y\right)
+							 \partial_x\theta_x
+					   \right)dA,
+				\\[6pt]
+				M_x &= \int_A \!\left(
+						   \sigma_{xz}\,y - \sigma_{xy}\,z
+					   \right)dA,
+				\\[6pt]
+				M_y &= \int_A z\,\sigma_{xx}\,dA
+					 = \int_A Ez\!\left(
+						   \partial_x w_x
+						   + z\,\partial_x\theta_y
+						   - y\,\partial_x\theta_z
+					   \right)dA,
+			   \\[6pt]
+				M_z &= -\int_A y\,\sigma_{xx}\,dA
+					 = -\int_A Ey\!\left(
+						   \partial_x w_x
+						   + z\,\partial_x\theta_y
+						   - y\,\partial_x\theta_z
+					   \right)dA.
+			\end{align*}
+
+			<p>Since we assume no torsion (\(\theta_x = 0\)), the torsional moment \(M_x\) goes away and is discarded from further analysis. The warping terms are also neglected under this assumption.</p>
+
+			<p>Carrying out the integration using the cross-sectional area integrals \(A\), \(S_y\), \(S_z\), \(I_{yy}\), \(I_{zz}\), \(I_{yz}\) and the shear areas \(A_y = \alpha_y A\), \(A_z = \alpha_z A\) ~(\(\alpha_i = \frac{5}{6}\) for rectangular cross sections in bending), the result is written as \(\vec{\sigma} = \mathbf{A}\vec{\varepsilon}\), with:</p>
+
+			\begin{equation}
+				\mathbf{A} =
+				\begin{bmatrix}
+					EA     & 0    & 0    & ES_y    & -ES_z   \\
+					0      & GA_y & 0    & 0       & 0       \\
+					0      & 0    & GA_z & 0       & 0       \\
+					ES_y   & 0    & 0    & EI_{yy} & -EI_{yz}\\
+					-ES_z  & 0    & 0    & -EI_{yz}& EI_{zz}
+				\end{bmatrix}.
+				\label{eq:A_matrix}
+			\end{equation}
+
+			<p>Since \(\mathbf{A}\) is constant in \(x\), differentiating \(\vec{\sigma} = \mathbf{A}\vec{\varepsilon}\) gives \(\partial_x\vec{\sigma} = \mathbf{A}\,\partial_x\vec{\varepsilon}\). Now the left-hand side of the equilibrium system can be written directly from the scalar equations as</p>
+
+			\[
+				\frac{d}{dx}
+				\begin{pmatrix} F_x \\ M_y \\ M_z \\ F_y \\ F_z \end{pmatrix}
+				=
+				\begin{pmatrix} 0 \\ F_z \\ -F_y \\ 0 \\ 0 \end{pmatrix}
+				-
+				\begin{pmatrix} f_x \\ m_y \\ m_z \\ f_y \\ f_z \end{pmatrix}.
+			\]
+
+			<p>The coupling term \((0,\,F_z,\,-F_y,\,0,\,0)^T\) on the right-hand side arises from \(\hat{i}\times\vec{F}\). We now express these coupling terms through the constitutive relations \(F_y = GA_y\gamma_y\) and \(F_z = GA_z\gamma_z\). Written out in full, this is:</p>
+
+			\begin{equation}
+				\frac{d}{dx}
+				\begin{pmatrix} F_x \\ M_y \\ M_z \\ F_y \\ F_z \end{pmatrix}
+				=
+				\begin{bmatrix}
+					0 & 0 & 0 & 0      & 0    \\
+					0 & 0 & 0 & 0      & GA_z \\
+					0 & 0 & 0 & -GA_y  & 0    \\
+					0 & 0 & 0 & 0      & 0    \\
+					0 & 0 & 0 & 0      & 0
+				\end{bmatrix}
+				\begin{bmatrix}
+					dw_x/dx \\ d\theta_y/dx \\ d\theta_z/dx \\
+					dw_y/dx - \theta_z \\ dw_z/dx + \theta_y
+				\end{bmatrix}
+				-
+				\begin{bmatrix}
+					f_x \\ m_y \\ m_z \\ f_y \\ f_z
+				\end{bmatrix}.
+				\label{eq:ODE_full}
+			\end{equation}
+
+			<p>We seek a stiffness relationship for the CRF from the governing ODE. Expanding \eqref{eq:ODE_full} gives five coupled scalar ODEs for the unknowns \(w_x\), \(w_y\), \(w_z\), \(\theta_y\), \(\theta_z\):</p>
+
+			\[ \frac{dF}{dx} = -f_x \]
+			\[ \frac{dM_y}{dx} = GA_z\!\left(\frac{dw_z}{dx} + \theta_y\right) - m_y \]
+			\[ \frac{dM_z}{dx} = -GA_y\!\left(\frac{dw_y}{dx} - \theta_z\right) - m_z \]
+			\[ \frac{dF_y}{dx} = -f_y \]
+			\[ \frac{dF_z}{dx} = -f_z \]
+
+			<p>Now note that we can take \(S_y\), \(S_z\) and \(I_{yz}\) = 0, to simplify our \(\mathbf{A}\) and give us the following relationships for our displacements.</p>
+
+			\[ \frac{dF}{dx} = EA\frac{d^2 w_x}{dx^2} = -f_x \]
+
+			\[ \frac{dM_y}{dx} = EI_{yy}\frac{d^2\theta_y}{dx^2}
+				= GA_z\!\left(\frac{dw_z}{dx} + \theta_y\right) - m_y \]
+
+			\[ \frac{dM_z}{dx} = EI_{zz}\frac{d^2\theta_z}{dx^2}
+				= -GA_y\!\left(\frac{dw_y}{dx} - \theta_z\right) - m_z \]
+
+			\[ \frac{dF_y}{dx} = GA_y\!\left(\frac{d^2 w_y}{dx^2}
+				- \frac{d\theta_z}{dx}\right) = -f_y \]
+
+			\[ \frac{dF_z}{dx} = GA_z\!\left(\frac{d^2 w_z}{dx^2}
+				+ \frac{d\theta_y}{dx}\right) = -f_z \]
+
+			<h2>3.6 Derivation of internal stress state</h2>
+
+			<p>Having established the governing ODEs and its boundary conditions, the solution yields the stresses as functions of \(x\). We now derive the stress field \(\boldsymbol{\sigma}(x,y,z)\) from this by substituting back through the constitutive and kinematic relations derived above.</p>
+
+			<h3>3.6.1 Normal stress</h3>
+
+			<p>The axial strain at a material point \((x,y,z)\) was derived as:</p>
+
+			\[
+				\varepsilon_{xx}(x,y,z)
+				= \frac{dw_x}{dx}
+				  + z\frac{d\theta_y}{dx}
+				  - y\frac{d\theta_z}{dx}
+				= \varepsilon(x) + z\kappa_y(x) - y\kappa_z(x).
+			\]
+
+			<p>Applying the constitutive relation \(\sigma_{xx} = E\varepsilon_{xx}\) we get:</p>
+
+			\[
+				\sigma_{xx}(x,y,z)
+				= E\!\left(
+					\varepsilon(x) + z\kappa_y(x) - y\kappa_z(x)
+				  \right).
+			\]
+
+			<p>To express this in terms of the stresses, the axial force and bending moments are as follows:</p>
+
+			\begin{align*}
+				F   &= EA\,\varepsilon + ES_y\,\kappa_y - ES_z\,\kappa_z,
+				\\
+				M_y &= ES_y\,\varepsilon + EI_{yy}\,\kappa_y - EI_{yz}\,\kappa_z,
+				\\
+				M_z &= -ES_z\,\varepsilon - EI_{yz}\,\kappa_y + EI_{zz}\,\kappa_z.
+			\end{align*}
+
+			<p>These equations form a \(3\times3\) linear system in \((\varepsilon, \kappa_y, \kappa_z)\).</p>
+
+			\[
+				\mathbf{A}_{11} =
+				\begin{bmatrix}
+					EA    & ES_y    & -ES_z   \\
+					ES_y  & EI_{yy} & -EI_{yz}\\
+					-ES_z & -EI_{yz}& EI_{zz}
+				\end{bmatrix},
+			\]
+
+			<p>For the specific case of a symmetric rectangular cross-section (\(S_y = S_z = I_{yz} = 0\)), the matrix \(\mathbf{A}_{11}\) is diagonal and simplifies to the result below <a href="#ref-7" class="cite">[7]</a>.</p>
+
+			\begin{equation}
+				\sigma_{xx}(x,y,z)
+				= \frac{F(x)}{A}
+				  + \frac{M_y(x)}{I_{yy}}\,z
+				  - \frac{M_z(x)}{I_{zz}}\,y,
+				\label{eq:sxx_simple}
+			\end{equation}
+
+			<p>The three terms represent the contributions from axial force, bending in the \(xz\)-plane, and bending in the \(xy\)-plane. The maximum normal stress occurs at the boundaries of the cross-section (where z and y are maximised)</p>
+
+			<h3>3.6.2 Average shear stress</h3>
+
+			<p>The Timoshenko shear strains \(\gamma_y\) and \(\gamma_z\) from \eqref{eq:eps_vec} give the section-averaged shear stresses directly through the constitutive relations:</p>
+
+			\begin{align}
+				\bar{\tau}_{xy}(x)
+					&= G\gamma_y(x)
+					 = G\!\left(\frac{dw_y}{dx} - \theta_z\right)
+					 = \frac{F_y(x)}{A_y}
+					 = \frac{F_y(x)}{\alpha_y A},
+				\label{eq:tau_avg_y}\\[4pt]
+				\bar{\tau}_{xz}(x)
+					&= G\gamma_z(x)
+					 = G\!\left(\frac{dw_z}{dx} + \theta_y\right)
+					 = \frac{F_z(x)}{A_z}
+					 = \frac{F_z(x)}{\alpha_z A}.
+				\label{eq:tau_avg_z}
+			\end{align}
+
+			<p>These are uniform averages over the cross-section. They represent the physical shear force per unit effective shear area and are sufficient for most engineering purposes. However, the true shear stress distribution is non-uniform across the section, as discussed below.</p>
+
+			<h3>3.6.3 Pointwise shear stress distribution</h3>
+
+			<p>The plane-section assumption constrains \(\gamma_{xy}\) to be independent of \(y\) and \(\gamma_{xz}\) to be independent of \(z\), produces a uniform shear stress. This is physically incorrect at the free surfaces of the cross-section. The true distribution is found from equilibrium of a sub-element of the cross-section using the shear flow equation. For bending in the \(xy\)-plane with shear force \(F_y\), consider a horizontal cut at height \(y\) through a rectangular section of width \(b\) and height \(h\). Equilibrium of the sub-element between the cut and the top surface gives the shear flow \(q(y)\):</p>
+
+			\[
+				q(y) = \tau_{xy}(y)\cdot b
+					 = \frac{F_y}{I_{zz}}\int_y^{h/2} y'\,b\,dy'
+					 = \frac{F_y\,b}{I_{zz}}
+					   \left[\frac{y'^2}{2}\right]_y^{h/2}
+					   = \frac{F_y\,b}{2I_{zz}}
+					   \left(\frac{h^2}{4} - y^2\right).
+			\]
+
+			<p>Dividing by the width \(b\) gives the shear stress function:</p>
+
+			\[
+				\tau_{xy}(y)
+				= \frac{F_y}{2I_{zz}}
+				  \left(\frac{h^2}{4} - y^2\right),
+			\]
+
+			<p>The Timoshenko shear correction factor for a solid rectangular section can be derived by equating the strain energy of the parabolic distribution to that of the uniform average:</p>
+
+			\begin{equation}
+				\alpha_y = \alpha_z
+				= \frac{\int_A \tau_{xy}^2\,dA}
+					   {A\,\bar{\tau}_{xy}^2}
+				= \frac{5}{6},
+				\label{eq:alpha_rect}
+			\end{equation}
+
+			<h3>3.6.4 Von Mises Stress and Yield Criterion</h3>
+
+			<p>For a complete assessment of the stress state at any point \((x,y,z)\), the normal and shear stresses are combined into the von Mises equivalent stress. On the beam cross-section, the relevant stress components are \(\sigma_{xx}\), \(\tau_{xy}\), and \(\tau_{xz}\), with \(\sigma_{yy} = \sigma_{zz} = \sigma_{yz} = 0\). The von Mises stress is given by the following equation <a href="#ref-7" class="cite">[7]</a>.</p>
+
+			\[
+				\sigma_{\mathrm{VM}}(x,y,z)
+				= \sqrt{
+					\sigma_{xx}^2
+					+ 3\!\left(\tau_{xy}^2 + \tau_{xz}^2\right)
+				  },
+			\]
+
+			<p>The yield criterion requires \(\sigma_{\mathrm{VM}} \leq \sigma_y\) everywhere. Substituting our above relations into the equation gives the yield criteria:</p>
+
+			\begin{equation}
+				\sqrt{
+					\left(
+						\frac{F_x}{A}
+						+ \frac{M_y z}{I_{yy}}
+						- \frac{M_z y}{I_{zz}}
+					\right)^2
+					+ 3\left[
+						\left(
+							\frac{F_y}{2I_{zz}}
+							\left(\frac{h^2}{4} - y^2\right)
+						\right)^2
+						+
+						\left(
+							\frac{F_z}{2I_{yy}}
+							\left(\frac{b^2}{4} - z^2\right)
+						\right)^2
+					  \right]
+				}
+				\leq \sigma_y.
+				\label{eq:yield_full}
+			\end{equation}
+
+			<h2>3.7 Applying boundary and initial conditions</h2>
+
+			<p>We now use the FBD of our CRF (see Fig. 5) to determine the boundary conditions. We let y from the diagram be x for the purposes of modelling.</p>
+
+			<figure>
+				<img src="images/FBD_Flexure.jpg" alt="FBD of flexural element" style="max-width: 55%;" />
+				<figcaption>Figure 5. FBD of flexural element. Shows fixed boundary conditions at \(y=0\) and natural boundary conditions at \(y=l_{flex}\).</figcaption>
+			</figure>
+
+			<p>The 5 governing equations for stiffness are second order in displacement and require ten boundary conditions. Variables a, c, and b are defined by the problem geometry. Moreover, we have a relationship between \(F_{cut}\)/\(F_{rad}\) and the cutting depth and feed rate. This is nominally given by the Kienzle-Victor equation for mild steel (our cutting condition) <a href="#ref-8" class="cite">[8]</a>. Note that this is an empirical relationship and thus no derivation provided.</p>
+
+			\begin{equation}
+				F_{cut}(f, a_p) = 982.2 \cdot f^{0.592} \cdot a_p^{1.094}
+				\label{eq:Fc}
+			\end{equation}
+
+			\begin{equation}
+				F_{rad}(f, a_p) = 238.0 \cdot f^{0.443} \cdot a_p^{-0.121}
+				\label{eq:Fp}
+			\end{equation}
+
+			<p>Where f is feed rate in mm/rev and \(a_p\) is depth of cut in mm. The output force is in Newtons.</p>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- RESULTS -->
+	<div class="content-margin-container" id="results">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+
+			<h1>4. Results</h1>
+
+			<p>We have equations and boundary conditions, and we can solve them. First, we will solve these for a range of reasonable feed rates, cutting depths, and \(a\) values. We will also consider a simulation of a worst case death cut of depth 1 cm. The nominal values for b and c for these simulations will be; 101.88 mm and 115.01 mm respectively. The variable \(a\) will change as a function of time and will be calculated as \(a(t) = l_{part} - t \times f\). This means that with a given part length, feed rate, and cutting depth we have a fully defined set of boundary conditions. Note also that the width and length of the CRF are not fixed, however the depth of the CRF given at 1".</p>
+
+			<h2>4.1 Analytical Solution of the Governing ODEs</h2>
+
+			<h3>4.1.1 Coordinate reorientation</h3>
+
+			<p>The Timoshenko beam theory derived above uses \(x\) as the axial coordinate. For the CRF, we reorient ourselves so that \(y\) is axial, \(x\) is transverse, and \(z\) is out of the page.</p>
+
+			<h3>4.1.2 Boundary conditions</h3>
+
+			\[
+				\text{at } y = 0:\quad
+				\begin{cases}
+					w_y(0) = 0,\\
+					w_x(0) = 0,\\
+					w_z(0) = 0,\\
+					\theta_x(0) = 0,\\
+					M_z(0) = EI_{zz}\,\dfrac{d\theta_z}{dy}\bigg|_0 = 0
+					\quad\text{(pin: free rotation, zero moment)},
+				\end{cases}
+			\]
+
+			\[
+				\text{at } y = l_\text{flex}:\quad
+				\begin{cases}
+					EA\,\dfrac{dw_y}{dy}\bigg|_{l_\text{flex}}
+						= -F_{y,\text{CRF}}
+						\quad\text{(compressive, acts in $-y$)},\\[8pt]
+					GA_x\!\left(\dfrac{dw_x}{dy} - \theta_z\right)\bigg|_{l_\text{flex}}
+						= 0.27\,F_\text{rad},\\[8pt]
+					F_z = 0,\quad M_x = 0,\\[4pt]
+					M_z(l_\text{flex}) = EI_{zz}\,\dfrac{d\theta_z}{dy}
+						\bigg|_{l_\text{flex}} = 0
+					\quad\text{(free end: zero moment)}.
+				\end{cases}
+			\]
+
+			<h3>4.1.3 Reduction of the system</h3>
+
+			<p>With no distributed loads (\(f_x = f_y = f_z = m_x = m_z = 0\)), and \(F_z = 0\) at \(y = l_\text{flex}\) and \(\partial_y F_z = 0\), we have \(F_z = 0\) everywhere. This gives \(w_z = 0\) and \(\theta_x = 0\) for all \(y\). The system reduces to:</p>
+
+			\begin{align*}
+				EA\frac{d^2 w_y}{dy^2} &= 0,
+				\\[4pt]
+				EI_{zz}\frac{d^2\theta_z}{dy^2}
+					&= -GA_x\!\left(\frac{dw_x}{dy} - \theta_z\right),
+				\\[4pt]
+				GA_x\!\left(\frac{d^2 w_x}{dy^2} - \frac{d\theta_z}{dy}\right)
+					&= 0
+			\end{align*}
+
+			<p>From the constitutive relations, \(F_x = GA_x(dw_x/dy - \theta_z)\) is constant (no distributed \(x\)-load) and is equal to its tip value \(F_x = 0.27\,F_\text{rad}\), thus we get:</p>
+
+			\begin{equation}
+				EI_{zz}\frac{d^2\theta_z}{dy^2} = -0.27\,F_\text{rad}.
+				\label{eq:theta_ode}
+			\end{equation}
+
+			<h3>4.1.4 Axial solution</h3>
+
+			<p>Integrating \(EA\,d^2w_y/dy^2 = 0\) twice gives \(w_y(y) = C_1 y + C_2\). Applying the boundary conditions, \(w_y(0) = 0\) gives \(C_2 = 0\), and \(EA\,dw_y/dy\big|_{l_\text{flex}} = -F_{y,\text{CRF}}\) gives \(C_1 = -F_{y,\text{CRF}}/(EA)\). The axial displacement is therefore \(w_y(y) = -F_{y,\text{CRF}}\,y/(EA)\), giving tip shortening \(|w_y(l_\text{flex})| = F_{y,\text{CRF}}\,l_\text{flex}/(EA)\) and axial stiffness:</p>
+
+			\begin{equation}
+				\boxed{k_y = \frac{EA}{l_\text{flex}}
+						   = \frac{E\,w_\text{flex}\,d_\text{flex}}{l_\text{flex}}.}
+				\label{eq:stiffness_ky}
+			\end{equation}
+
+			<h3>4.1.5 Bending Solution</h3>
+
+			<p>Integrating \eqref{eq:theta_ode} once:</p>
+
+			\[ EI_{zz}\frac{d\theta_z}{dy} = -0.27\,F_\text{rad}\cdot y + C_1. \]
+
+			<p>Applying the free-end condition \(M_z(l_\text{flex}) = 0\):</p>
+
+			\[ -0.27\,F_\text{rad}\cdot l_\text{flex} + C_1 = 0
+				\quad\Rightarrow\quad C_1 = 0.27\,F_\text{rad}\cdot l_\text{flex}. \]
+
+			<p>The bending moment diagram is therefore:</p>
+
+			\[ M_z(y) = 0.27\,F_\text{rad}(l_\text{flex} - y), \]
+
+			<p>Which satisfies \(M_z(l_\text{flex}) = 0\) and \(M_z(0) = 0.27\,F_\text{rad}\,l_\text{flex}\), consistent with the applied load. Thus:</p>
+
+			\[ \frac{d\theta_z}{dy} =
+				\frac{0.27\,F_\text{rad}}{EI_{zz}}\,(l_\text{flex} - y). \]
+
+			<p>Integrating and setting \(\theta_z(0) = 0\):</p>
+
+			\begin{equation}
+				\boxed{
+				\theta_z(y) = \frac{0.27\,F_\text{rad}}{EI_{zz}}
+							  \!\left(l_\text{flex}\,y - \frac{y^2}{2}\right).
+				}
+				\label{eq:sol_thetaz}
+			\end{equation}
+
+			<p>Using \(dw_x/dy = \theta_z + 0.27\,F_\text{rad}/(GA_x)\) and integrating with \(w_x(0) = 0\):</p>
+
+			\begin{equation}
+				\boxed{
+				w_x(y) = \frac{0.27\,F_\text{rad}}{EI_{zz}}
+						 \!\left(\frac{l_\text{flex}\,y^2}{2}
+						 - \frac{y^3}{6}\right)
+						 + \frac{0.27\,F_\text{rad}}{GA_x}\,y.
+				}
+				\label{eq:sol_wx}
+			\end{equation}
+
+			<p>The tip transverse deflection and transverse stiffness are:</p>
+
+			\[
+				w_x(l_\text{flex})
+				= \frac{0.27\,F_\text{rad}\,l_\text{flex}^3}{3\,EI_{zz}}
+				  + \frac{0.27\,F_\text{rad}\,l_\text{flex}}{GA_x},
+			\]
+			\[
+				k_x = \frac{0.27\,F_\text{rad}}{w_x(l_\text{flex})}
+					= \frac{1}{\dfrac{l_\text{flex}^3}{3\,EI_{zz}}
+					  + \dfrac{l_\text{flex}}{GA_x}},
+			\]
+
+			<h3>4.1.6 Stresses and von Mises criteria</h3>
+
+			<p>The stresses along the beam are:</p>
+
+			\[
+				F_y = -F_{y,\text{CRF}},\quad
+				F_x = 0.27\,F_\text{rad},\quad
+				M_z(y) = 0.27\,F_\text{rad}\,(l_{flex}-y),\quad
+				F_z = M_x = M_y = 0.
+			\]
+
+			<p>Thus, our maximum Von Mises stresses are given by (shear stress is assumed zero as axial stress dominates):</p>
+
+			\begin{equation}
+				\boxed{
+				\sigma_\text{VM}^\text{max}
+				= \left|\,
+					\frac{F_{y,\text{CRF}}}{w_\text{flex}\,d_\text{flex}}
+					+ \frac{1.62\,F_\text{rad}\,l_\text{flex}}
+						   {d_\text{flex}\,w_\text{flex}^2}
+				  \,\right|
+				  \leq \sigma_\text{fatigue} = 96.5\ \text{MPa}.
+				}
+				\label{eq:crf_vm_max}
+			\end{equation}
+
+			<p>These equations together define the feasible design space in \((w_\text{flex},\,l_\text{flex})\).</p>
+
+			<h2>4.2 MATLAB analytical results</h2>
+
+			<p>Using the closed-form expressions from above, the design space was explored by sweeping over the two free geometric parameters \(w_\text{flex} \in [0.01,\,0.15]\) and \(l_\text{flex} \in [0.3,\,1.4]\) at the worst-case load condition (\(f = 0.30\) mm/rev, \(a_p = 2.0\) mm, \(a = 51\) mm). The three quantities of primary interest were the peak von Mises stress \(\sigma_\text{VM}^\text{max}\), axial stiffness \(k_y\), and transverse stiffness \(k_x\) (See Fig. 6).</p>
+
+			<figure>
+				<img src="images/ParamSweep_WorstCaseCutting.png" alt="Design sweep over flexure width and length" />
+				<figcaption>Figure 6. Design sweep over flexure width \(w_\text{flex}\) and length \(l_\text{flex}\) at the worst-case cutting condition. Left: maximum von Mises stress with the fatigue limit (\(\sigma_\text{fat} = 96.5\) MPa, red) and yield strength (\(\sigma_Y = 276\) MPa, dashed) contours overlaid. Centre: axial stiffness \(k_y\). Right: transverse stiffness \(k_x\). The nominal design point (\(w_\text{flex} = 0.060\) in, \(l_\text{flex} = 0.63\) in) is marked in all plots.</figcaption>
+			</figure>
+
+			<p>The stress map shows that the feasible region is bounded on the right by the fatigue contour at \(w_\text{flex} \approx 0.05\) in, above which the bending stress exceeds the fatigue limit under worst-case loading. The nominal design point sits comfortably within this feasible region. Axial stiffness \(k_y\) increases with \(w_\text{flex}\) and decreases with \(l_\text{flex}\) as expected, reaching &sim;\(1.1 \times 10^6\) N/m at the nominal point. Transverse stiffness \(k_x\) is dominated by the cubic dependence on \(w_\text{flex}\) and is relatively insensitive to \(l_\text{flex}\).</p>
+
+			<p>To show how the CRF responds across the practical range of cutting conditions at fixed geometry, Fig. 7 shows the peak von Mises stress and deflection as functions of feed rate and depth of cut at the nominal design point.</p>
+
+			<figure>
+				<img src="images/Stress_Deflection_NomGeometry.png" alt="Von Mises stress and tip deflection at nominal geometry" style="max-width: 70%;" />
+				<figcaption>Figure 7. Von Mises stress and tip deflection at the nominal geometry (\(w_\text{flex} = 0.060\) in, \(l_\text{flex} = 0.63\) in) across a range of feed rates and cutting depths. The fatigue limit contour is shown in red on the stress map. The operating point is marked with an asterisk.</figcaption>
+			</figure>
+
+			<p>The stress map confirms that the design remains below the fatigue limit across the full range of cutting conditions. Only at the most aggressive feed rates (\(f \gtrsim 0.45\) mm/rev) does the stress approach the fatigue limit, and even then only at large depths of cut. The nominal operating point (\(f = 0.15\) mm/rev, \(a_p = 0.5\) mm) gives a peak stress of approximately 45 MPa, providing a safety factor of roughly 2.1 against the fatigue limit. The six-panel plot in Fig. 8 shows the complete deformation and stress state along the flexure length.</p>
+
+			<figure>
+				<img src="images/BeamDeflections.png" alt="Analytical solution along the CRF" style="max-width: 70%;" />
+				<figcaption>Figure 8. Analytical solution along the CRF at the nominal operating condition (\(f = 0.15\) mm/rev, \(a_p = 0.5\) mm, \(w_\text{flex} = 0.060\) in, \(l_\text{flex} = 0.63\) in). Top row: transverse deflection \(w_x(y)\), axial shortening \(w_y(y)\), and rotation \(\theta_z(y)\). Bottom row: bending moment \(M_z(y)\), normal stress \(\sigma_{yy}(y)\), and von Mises stress \(\sigma_\text{VM}(y)\) with the fatigue limit shown as a dashed red line.</figcaption>
+			</figure>
+
+			<h2>4.3 SolidWorks finite element analysis</h2>
+
+			<p>To validate the analytical model and capture any three-dimensional effects not present in the simplified beam theory, a SolidWorks finite element analysis simulation (FEA) was performed on the CRF geometry. The worst-case loading condition was applied, namely, an axial compressive force of \(F_{y,\text{CRF}} = 189\) N distributed over the top face, and a transverse force of \(0.27 \times F_\text{rad} = 29\) N applied at the same face (see Fig. 9).</p>
+
+			<figure class="figure-row">
+				<div>
+					<img src="images/FEA_strain.png" alt="Resultant displacement under worst-case loading" />
+					<figcaption>(a) Resultant displacement under worst-case loading. Maximum displacement of 0.286 mm occurs at the top of the flexure blade.</figcaption>
+				</div>
+				<div>
+					<img src="images/FEA_Stress.png" alt="Von Mises stress under worst-case loading" />
+					<figcaption>(b) Von Mises stress (N/m&sup2;) under worst-case loading. Peak stress of \(7.03 \times 10^7\) Pa = 70.3 MPa occurs at the base of the blade flexure, in agreement with the analytical prediction.</figcaption>
+				</div>
+				<figcaption style="flex-basis: 100%;">Figure 9. SolidWorks FEA results under worst-case loading. The flexure blade remains below yield.</figcaption>
+			</figure>
+
+			<p>The FEA results are in agreement with the analytical model. The peak von Mises stress from the FEA is 70.3 MPa, compared with the analytical prediction of approximately 70 MPa. The stress concentration at the blade root is well captured by the bending-dominated analytical expression, confirming that three-dimensional effects and geometric stress concentrations at the slot corners are minor contributors to the peak stress for this geometry. The maximum FEA displacement of 0.286 mm is also consistent with the analytical tip deflection.</p>
+
+			<h2>4.4 Extension into geometric nonlinearity</h2>
+
+			<p>The derivation in Section 3 rests on Assumption 1: that slopes are small, so the exact curvature can be approximated as \(\kappa_z \approx d^2w_x/dy^2\). In this section we relax this assumption by retaining the geometrically exact curvature expression and deriving the weakly nonlinear correction to the tip deflection. This allows us to quantify the error introduced by the linearisation as a function of applied load.</p>
+
+			<h3>4.4.1 Geometrically exact curvature</h3>
+
+			<p>The exact curvature of the deformed beam centreline in the \(xy\)-plane is <a href="#ref-4" class="cite">[4]</a></p>
+
+			\begin{equation}
+				\kappa_z^\text{exact}
+				= \frac{d^2 w_x/dy^2}
+					   {\left[1 + \left(dw_x/dy\right)^2\right]^{3/2}}.
+				\label{eq:exact_curvature}
+			\end{equation}
+
+			<p>Denoting \(w' = dw_x/dy\) for compactness, we expand the denominator for small slopes using a binomial series:</p>
+
+			\[
+				\frac{1}{\left(1 + w'^2\right)^{3/2}}
+				= 1 - \frac{3}{2}w'^2 + \mathcal{O}(w'^4),
+				\implies \kappa_z^\text{exact}
+				= w''\!\left(1 - \frac{3}{2}w'^2\right) + \mathcal{O}(w'^4 w'')
+			\]
+
+			<p>Where \(w'' = d^2w_x/dy^2\). The linear theory retains only the \(w''\) term; the weakly nonlinear theory retains the \(-\frac{3}{2}w'^2 w''\) correction.</p>
+
+			<h3>4.4.2 Weakly nonlinear bending ODE</h3>
+
+			<p>Substituting the above relation into the moment-curvature relation \(M_z = EI_{zz}\kappa_z\) and using the moment expression \(M_z(y) = 0.27\,F_\text{rad}(l_\text{flex} - y)\) from the force analysis, the governing ODE becomes:</p>
+
+			\begin{equation}
+				EI_{zz}\,w''\!\left(1 - \frac{3}{2}w'^2\right)
+				= 0.27\,F_\text{rad}\,(l_\text{flex} - y).
+				\label{eq:nonlinear_ode}
+			\end{equation}
+
+			<p>We seek a perturbation expansion \(w_x = w_x^{(0)} + \epsilon\, w_x^{(1)} + \mathcal{O}(\epsilon^2)\), where \(\epsilon\) is a small dimensionless parameter defined by</p>
+
+			\[
+				\epsilon = \frac{3}{2}\left(\frac{dw_x^{(0)}}{dy}\bigg|_{y=l_\text{flex}}\right)^2,
+			\]
+
+			<p>At zeroth order (\(\epsilon^0\)): The linear problem, whose solution is</p>
+
+			\[
+				w_x^{(0)}(y)
+				= \frac{0.27\,F_\text{rad}}{EI_{zz}}
+				  \!\left(\frac{l_\text{flex}\,y^2}{2} - \frac{y^3}{6}\right)
+				  + \frac{0.27\,F_\text{rad}}{GA_x}\,y,
+			\]
+
+			<p>As derived in \eqref{eq:sol_wx}. The tip slope of this solution is</p>
+
+			\[
+				w_0' \equiv \frac{dw_x^{(0)}}{dy}\bigg|_{y=l_\text{flex}}
+				= \frac{0.27\,F_\text{rad}\,l_\text{flex}^2}{2EI_{zz}}
+				  + \frac{0.27\,F_\text{rad}}{GA_x}.
+			\]
+
+			<p>As first order (\(\epsilon^1\)): Substituting \(w_x = w_x^{(0)} + w_x^{(1)}\) into \eqref{eq:nonlinear_ode} and collecting first-order terms gives</p>
+
+			\[
+				EI_{zz}\,w_x^{(1)''}
+				= \frac{3}{2}\,EI_{zz}\,w_x^{(0)''}\!\left(w_x^{(0)'}\right)^2.
+			\]
+
+			<p>The right-hand side is a known function of \(y\) through the zeroth-order solution. This ODE is subject to the same homogeneous boundary conditions as the linear problem: \(w_x^{(1)}(0) = 0\) and \(M_z^{(1)}(0) = M_z^{(1)}(l_\text{flex}) = 0\). Integrating twice with these conditions gives the first-order correction to the tip deflection:</p>
+
+			\[
+				\Delta w_x^\text{NL}
+				\equiv w_x^{(1)}(l_\text{flex})
+				= \frac{3}{2}\int_0^{l_\text{flex}}
+					(l_\text{flex} - y)\,w_x^{(0)''}\!\left(w_x^{(0)'}\right)^2\,dy,
+			\]
+
+			<p>This can be evaluated analytically by substituting the explicit forms of \(w_x^{(0)'}\) and \(w_x^{(0)''}\).</p>
+
+			<h3>4.4.3 Relative error from geometric linearisation</h3>
+
+			<p>To compare with the linear result, the fractional error in tip deflection due to linearisation is:</p>
+
+			\begin{equation}
+				\eta
+				= \frac{\Delta w_x^\text{NL}}{w_x^{(0)}(l_\text{flex})}
+				\approx \frac{3}{8}\left(w_0'\right)^2,
+				\label{eq:eta_approx}
+			\end{equation}
+
+			<p>Where the approximation holds when the shear contribution to tip slope is small relative to the bending contribution. Evaluating at the nominal operating condition defined above gives us:</p>
+
+			\[
+				w_0'
+				\approx \frac{0.27 \times 29 \times (16.0 \times 10^{-3})^2}
+							 {2 \times 68.9 \times 10^9 \times 2.13 \times 10^{-11}}
+				\approx 7.6 \times 10^{-3}\ \text{rad},
+			\]
+
+			<p>giving a fractional error of</p>
+
+			\[
+				\eta
+				\approx \frac{3}{8}\left(7.6 \times 10^{-3}\right)^2
+				\approx 2.2 \times 10^{-5}
+				\approx 0.002\%.
+			\]
+
+			<p>At the worst-case cutting condition (\(f = 0.30\) mm/rev, \(a_p = 2.0\) mm), \(0.27\,F_\text{rad} \approx 42\) N, which increases the tip slope by approximately 45% to \(w_0' \approx 1.1 \times 10^{-2}\) rad, giving \(\eta \approx 4.6 \times 10^{-5} \approx 0.005\%\).</p>
+
+			<p>Thus, the geometric nonlinearity introduces a fractional error in tip deflection that is less than 0.005% across the entire operating envelope. This confirms that Assumption 1 is justified; the CRF operates well within the small-angle regime, and the linear model is good enough. The result is physically intuitive as the tip slope of order \(10^{-2}\) rad means the flexure deflects through less than \(0.6^\circ\) even at the worst-case load.</p>
+
+			<h2>4.5 Experimental results</h2>
+
+			<h3>4.5.1 Manufacturing</h3>
+
+			<p>The CRF was manufactured by water jetting the outline and then drilling and tapping two holes on the top surface so that it can be bolted to the carriage. This came with two main difficulties. Firstly, the flexure width was a critical dimension and as such the waterjet needed to cut precise dimensions. This required calibrating the waterjet nozzle to accommodate for the kerf and taper when cutting the piece, as well as moving the insertion points into the metal to non-critical locations. Secondly, a frame was placed around the CRF to allow for fixturing in a vice to enable the drilling and tapping operations (See Fig. 10).</p>
+
+			<figure>
+				<img src="images/FailedCRFv2.jpeg" alt="Failed CRF piece cut out of 1 in thick Aluminium 6061" style="max-width: 40%;" />
+				<figcaption>Figure 10. Failed CRF piece cut out of 1 in thick Aluminium 6061. During this cut, the insertion points were not moved away from the critical dimensions, leading to over-cutting in these regions. Alterations to the design are noted in red on the piece.</figcaption>
+			</figure>
+
+			<h3>4.5.2 Physical testing</h3>
+
+			<p>Following successful manufacture of the corrected CRF, the flexure was subjected to a series of informal but severe mechanical tests to verify that it behaves as intended. No failures, permanent deformations, or visible damage were observed in any of these tests. General operations testing. The CRF was installed in the lathe and operated through a range of cutting conditions including turning and threading passes on aluminium and mild steel stock. The carriage traversed its full range of travel repeatedly without any evidence of binding, fatigue cracking, or loss of stiffness. Death cut test. A deep roughing cut was taken at \(a_p = 10\) mm depth of cut, which is well beyond the nominal operating envelope and corresponding to cutting forces substantially above those used in the design analysis. Drop test. The assembled carriage was dropped from a height of approximately 1 m onto the floor, applying a sharp impulse load to the guide rod and hence the CRF. The flexure survived without visible damage. Hammer test. The spindle was struck axially with a hammer. Applying a transverse impulse in the stiff direction of the CRF. No permanent deformation or fastener loosening was observed. Taken together, these tests establish that the CRF performs as intended across a range of loading conditions from well below to well above its design operating point. The absence of any failure mode is consistent with the analytical and FEA predictions.</p>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- DISCUSSION AND CONCLUSION -->
+	<div class="content-margin-container" id="discussion">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+
+			<h1>5. Discussion and conclusion</h1>
+
+			<h2>5.1 Summary of modelling conducted</h2>
+
+			<p>This project developed a complete analytical model for the carriage rail flexure of the lathe, going from a FBD of carriage forces, into a Timoshenko beam bending derivation yielding a governing ODE, to closed-form expressions for axial stiffness, transverse stiffness, and peak von Mises stress as functions of the geometric parameters. These results were then tested in simulation and in reality.</p>
+
+			<h2>5.2 Conclusions</h2>
+
+			<p>At the selected geometry (\(w_\text{flex} = 0.060\) in, \(l_\text{flex} = 0.63\) in), the axial stiffness is \(k_y \approx 1.1 \times 10^6\) N/m and the worst-case peak von Mises stress reaches approximately 70 MPa, giving a nominal fatigue safety factor of 2.1. The SolidWorks FEA result of 70.3 MPa agrees with the analytical prediction. The use of Timoshenko rather than Euler&ndash;Bernoulli theory is justified by the flexure aspect ratio: the shear correction accounts for approximately 15% of the total tip deflection at the nominal geometry, an error that would be significant in a machine. The geometric nonlinearity analysis confirms that the corresponding modelling assumption introduced a very small error across the operating conditions, validating the linear modelling assumptions. Future work could extend this modelling by considering even higher stress conditions where the non-linear terms could become significant. Moreover, the generality of this derivation provides a strong foundation for applying these analyses to more complex geometries such as the Dancing Queen or other critical parts of the lathe which require precise modelling.</p>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- APPENDIX -->
+	<div class="content-margin-container" id="appendix">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+
+			<h1>Appendix</h1>
+
+			<h2>A.1 Timoshenko beam bending derivation (lab notebook)</h2>
+
+			<embed class="pdf-embed" src="timoshenko.pdf" type="application/pdf" />
+			<p class="pdf-fallback">If the derivation above doesn't display, <a href="timoshenko.pdf" target="_blank" rel="noopener">open the PDF directly</a>.</p>
+
+			<h2>A.2 X-direction stiffness and force modelling (lab notebook)</h2>
+
+			<embed class="pdf-embed" src="xforcemodel.pdf" type="application/pdf" />
+			<p class="pdf-fallback">If the derivation above doesn't display, <a href="xforcemodel.pdf" target="_blank" rel="noopener">open the PDF directly</a>.</p>
+
+			<h2>A.3 Curvature at small deflections</h2>
+
+			<figure>
+				<img src="images/Curvature.jpeg" alt="Radius-of-curvature geometry" style="max-width: 55%;" />
+				<figcaption>Figure 11. Radius-of-curvature geometry showing \(r_y\,d\theta_y = dx\), from which \(\kappa_y = \partial_x\theta_y\).</figcaption>
+			</figure>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+	<!-- REFERENCES -->
+	<div class="content-margin-container" id="references">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+
+			<h1>References</h1>
+
+			<ol class="references">
+				<li id="ref-1">M. Culpepper, "2.72/2.720 Elements of Mechanical Design &ndash; Spring 2026.v7," MIT, Feb. 2026.</li>
+				<li id="ref-2">J. B. Hopkins and M. L. Culpepper, "Synthesis of precision serial flexure systems using freedom and constraint topologies (FACT)," <em>Precision Engineering</em>, vol. 35, no. 4, pp. 638&ndash;649, Oct. 2011.</li>
+				<li id="ref-3">A. H. Slocum, <em>Precision Machine Design</em>. Englewood Cliffs, NJ: Prentice Hall, 1992.</li>
+				<li id="ref-4">L. Andersen and S. R. K. Nielsen, "Elastic Beams in Three Dimensions," Lecture Notes, Aalborg University, Department of Civil Engineering, Aalborg, Denmark, 2008.</li>
+				<li id="ref-5">S. T. Smith, <em>Flexures: Elements of Elastic Mechanisms</em>. CRC Press, Aug. 2000.</li>
+				<li id="ref-6">"Aluminium / Aluminum 6061 Alloy (UNS A96061)," <em>AZO Materials</em>, AZoNetwork, Sep. 2012.</li>
+				<li id="ref-7">J. E. Shigley, C. R. Mischke, and R. G. Budynas, <em>Mechanical Engineering Design</em>, 7th ed. Boston: McGraw-Hill Higher Education, 2006.</li>
+				<li id="ref-8">R. Horv&aacute;th and J. Luk&aacute;cs, "Application of a Force Model Adapted for the Precise Turning of Various Metallic Materials," <em>Strojni&scaron;ki vestnik &ndash; Journal of Mechanical Engineering</em>, vol. 63, no. 9, pp. 489&ndash;500, Sep. 2017.</li>
+			</ol>
+
+			<p style="font-size: 0.85em; margin-top: 1em;"><a href="references.bib">Download the full BibTeX file</a>.</p>
+
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
+
+</body>
+
+</html>

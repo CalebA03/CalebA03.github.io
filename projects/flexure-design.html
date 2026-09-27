@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects</title>
+  <title>Designing Precision Flexures for 2.72 Lathe</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -140,55 +140,65 @@
     .page__title {
       font-size: 1.5625em;
       font-weight: bold;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
       line-height: 1.2;
     }
 
-    .archive__item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
+    .page__meta {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
     }
 
-    .archive__item:first-child { border-top: 1px solid var(--border); }
+    .page__content h2 {
+      font-size: 1.25em;
+      font-weight: bold;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border);
+    }
 
-    .archive__item-teaser {
-      width: 160px;
-      height: 120px;
+    .page__content p {
+      font-size: 1rem;
+      line-height: 1.625;
+      color: var(--text);
+    }
+
+    /* figures — full width by default */
+    .figure { margin: 1.25rem 0; }
+
+    .figure__img {
+      width: 100%;
       overflow: hidden;
       background: #e8e8e8;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: #aaa;
       text-align: center;
-      flex-shrink: 0;
     }
 
-    .archive__item-teaser img { width: 100%; height: 100%; object-fit: cover; }
-
-    .archive__item-title {
-      font-size: 0.9375rem;
-      font-weight: bold;
-      margin-bottom: 0.15rem;
-      line-height: 1.3;
+    .figure__img img {
+      width: 100%;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
 
-    .archive__item-title a { color: var(--text); text-decoration: none; }
-    .archive__item-title a:hover { color: var(--link); text-decoration: underline; }
-
-    .archive__item-excerpt {
-      font-size: 0.875rem;
+    .figure__caption {
+      font-size: 0.75rem;
       color: var(--text-light);
-      margin-bottom: 0.3rem;
-      line-height: 1.5;
+      margin-top: 0.35rem;
+      font-style: italic;
+      text-align: center;
     }
 
-    .archive__item-tags { font-size: 0.8125rem; color: var(--text-light); }
+    .report-link {
+      display: inline-block;
+      margin: 0.5rem 0 1.5rem;
+      font-weight: bold;
+    }
 
     .page__footer {
       background: #404040;
@@ -206,8 +216,6 @@
       #main { flex-direction: column; }
       .sidebar { width: 100%; position: static; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
       .author__avatar { width: 80px; height: 80px; margin: 0; flex-shrink: 0; }
-      .archive__item { grid-template-columns: 1fr; }
-      .archive__item-teaser { width: 100%; height: 200px; }
     }
   </style>
 </head>
@@ -219,8 +227,8 @@
     <nav>
       <ul class="greedy-nav">
         <li><a href="../index.html">Home</a></li>
-        <li><a href="projects.html" aria-current="page">Projects</a></li>
-        <li><a href="writing.html">Writing</a></li>
+        <li><a href="../projects.html" aria-current="page">Projects</a></li>
+        <li><a href="../writing.html">Writing</a></li>
       </ul>
     </nav>
   </div>
@@ -230,7 +238,7 @@
 
   <div class="sidebar">
     <div class="author__avatar">
-      <img src="artifacts/Headshot.jpeg" alt="Caleb Adams" />
+      <img src="../artifacts/Headshot.jpeg" alt="Caleb Adams" />
     </div>
     <div class="author__content">
       <h3 class="author__name">Caleb Adams</h3>
@@ -256,89 +264,28 @@
   </div>
 
   <article class="page">
-    <h1 class="page__title">Projects</h1>
 
-    <!-- PROJECT 1 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/copper-spoons/single_spoon.jpeg" alt="Copper Spoons" />
+    <h1 class="page__title">Designing Precision Flexures for 2.72 Lathe</h1>
+    <p class="page__meta">18.345 Project &middot; MIT</p>
+
+    <div class="page__content">
+
+      <h2>Overview</h2>
+
+      <p>I derived an analytical model for the carriage rail flexure (CRF) on my 2.72 desktop lathe, the blade flexure that connects the carriage to the guide rail. I worked from a free body diagram of the carriage through a full Timoshenko beam bending derivation to closed-form expressions for axial stiffness, transverse stiffness, and peak stress as functions of the flexure's width and length. I then checked the model against a SolidWorks FEA simulation, machined the flexure, and ran it through a series of physical tests on the lathe.</p>
+
+      <p>The full write-up covers the beam theory derivation from first principles, the MATLAB design-space sweeps, the FEA validation, an extension into geometric nonlinearity, and the manufacturing and testing of the actual part.</p>
+
+      <a class="report-link" href="reports/flexure-design/index.html">Read the full report &rarr;</a>
+
+      <div class="figure">
+        <div class="figure__img">
+          <img src="../artifacts/flexure-design/thumb.jpeg" alt="Machined carriage rail flexure" />
+        </div>
+        <p class="figure__caption">The carriage rail flexure, cut from 1 in thick Aluminium 6061 on the waterjet.</p>
       </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/copper-spoons.html">Copper Spoons</a></h2>
-        <p class="archive__item-excerpt">Hand forming a set of copper spoons: die cutting, work hardening, heat treating, and brazing.</p>
-      </div>
+
     </div>
-
-    <!-- PROJECT 2 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/yoyo/final_yoyos.png" alt="Yo-Yo Manufacturing" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/yoyo.html">Yo-Yo Manufacturing</a></h2>
-        <p class="archive__item-excerpt">Designing and manufacturing a custom yo-yo from mold design through SLA printing, CNC machining, thermoforming, and injection molding.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 3 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/lathe/FullLathe.jpeg" alt="Desktop Precision Lathe" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/lathe.html">2.72 - Desktop Lathe</a></h2>
-        <p class="archive__item-excerpt">For 2.72 my group designed and manufactured a small precision desktop lathe capable of turning and facing 12L14 steel with ~10 µm precision.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 4 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/flexure-design/thumb.jpeg" alt="Designing Precision Flexures for 2.72 Lathe" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/flexure-design.html">Designing Precision Flexures for 2.72 Lathe</a></h2>
-        <p class="archive__item-excerpt">Deriving a Timoshenko beam bending model for the desktop lathe's carriage rail flexure, validated with FEA and physical testing.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 5 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="projects/reports/tremor-features/images/TS-TCC_Model_Diagram.png" alt="Learning Interpretable Tremor Features" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/tremor-features.html">Learning Interpretable Tremor Features</a></h2>
-        <p class="archive__item-excerpt">A contrastive learning model trained on wearable IMU data, compared against hand designed tremor features.</p>
-      </div>
-    </div>
-
-    <!-- PROJECT 6 -->
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/divine-comedy/fig1_word_adjacency_network.png" alt="Word adjacency network of the Divine Comedy" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="projects/divine-comedy.html">The Divine Comedy as a Complex System</a></h2>
-        <p class="archive__item-excerpt">Applying network, statistical, and entropy analysis from Complex Systems to Dante's <em>Divine Comedy</em>, published in the ACM Journal on Computing and Cultural Heritage.</p>
-      </div>
-    </div>
-
-    <!-- Add future projects below in the same format:
-
-    <div class="archive__item">
-      <div class="archive__item-teaser">
-        <img src="artifacts/PROJECTNAME/thumb.jpg" alt="Project title" />
-      </div>
-      <div class="archive__item-body">
-        <h2 class="archive__item-title"><a href="_projects/PROJECTNAME.html">Project Title</a></h2>
-        <p class="archive__item-excerpt">Short description. Course or context, year.</p>
-        <p class="archive__item-tags">Tag &middot; Tag &middot; Tag</p>
-      </div>
-    </div>
-
-    -->
-
   </article>
 
 </div>
