@@ -426,22 +426,6 @@
       <!-- BLOG EDIT: "A cross slide HTM was something I also created" is back-to-front word order. Suggest: "I also created a cross slide homogeneous transformation matrix (HTM) model" — then add the gloss "(HTM — a mathematical tool for tracking how small errors at each joint stack up at the tool tip)" before continuing with the rest of the sentence as written. -->
       <p>A cross slide HTM (homogeneous transformation matrix — a mathematical tool for tracking how small errors at each joint stack up at the tool tip) was something I also created for modelling the cross slide. It was designed to capture changes in the tool tip position due to axial loading of the lead screw, lead screw misalignment, thermal expansion of the lead screw, bending of the tool post, and deflection of the tool tip. Effects such as deflection of the dovetail were neglected using order of magnitude (OOM) estimates.</p>
 
-      <!-- HTM images reuploaded from portfolio PDF (much higher res) — reduced width pair -->
-      <div class="figure-row figure-row--small">
-        <div class="figure">
-          <div class="figure__img">
-            <img src="../artifacts/lathe/HTM_ToolPost_Tool.PNG" alt="HTM of tool post and tool" />
-          </div>
-          <p class="figure__caption">Figure 12. HTM of tool post and tool.</p>
-        </div>
-        <div class="figure">
-          <div class="figure__img">
-            <img src="../artifacts/lathe/HTM_Dovetail.PNG" alt="HTM of dovetail and lead screw" />
-          </div>
-          <p class="figure__caption">Figure 13. HTM of dovetail and lead screw.</p>
-        </div>
-      </div>
-
       <p>I also did bolted joint calculations on bolts for the CNC motor mount and the side skirts. This was done using the bolted joint calculator that our team developed. This calculator uses the bolt geometry, material properties and loading conditions and checks joint stiffness, required preload, load capacity in tension, and load capacity in shear. As these bolts are only resisting shear loads, a simple first order model taking the overall shear force acting on that surface and dividing by the number of bolts gives shear stresses that are 2 orders of magnitude lower than the yield stress of the bolts.</p>
 
       <h2>Z Drive</h2>
@@ -453,25 +437,17 @@
         <div class="figure__img">
           <img src="../artifacts/lathe/ZDriveAssembly.PNG" alt="Z drive assembly CAD cross section view" />
         </div>
-        <p class="figure__caption">Figure 14. Z drive assembly CAD cross section view.</p>
+        <p class="figure__caption">Figure 12. Z drive assembly CAD cross section view.</p>
       </div>
 
-      <p>For this sub assembly, my role was to design the tail stock modifications, carriage rail flexure, side skirts (in part), and do bolted joint calculations for the CNC motor mounts and the side skirts. Starting with the tail stock modifications. I created the CAD and completed the machining for this part (see Figure 15). In terms of machining, the processes that were involved were; widening the central pocket to accommodate the tube stock, drilling and milling side pockets for the guide rods, cutting slits for the guide rod holes to allow for tightening, drilling and milling bolt holes to tighten the clamps on the guide rods and to fasten the L brackets to them. This piece also underwent GD&amp;T (see Figure 15). For the GD&amp;T, we specified locations of guide rod holes and the central pocket to within 2 thou of the nominal location. This was specified as these dimensions determine the alignment of the tube stock and the guide rods which are critical structural elements. Tight tolerances were also specified for critical diameters, such as the tub stock pocket and the guide rod holes. This was because if these were oversized it would lead to significant misalignment and that would eat into the error budget that our potting was aiming to correct.</p>
-
-      <!-- Tailstock_GDT reuploaded — shrunk to 75% -->
-      <div class="figure figure--075">
-        <div class="figure__img">
-          <img src="../artifacts/lathe/Tailstock_GDT.PNG" alt="Tail stock GD&T" />
-        </div>
-        <p class="figure__caption">Figure 15. Tail stock GD&amp;T.</p>
-      </div>
+      <p>For this sub assembly, my role was to design the tail stock modifications, carriage rail flexure, side skirts (in part), and do bolted joint calculations for the CNC motor mounts and the side skirts. Starting with the tail stock modifications. I created the CAD and completed the machining for this part. In terms of machining, the processes that were involved were; widening the central pocket to accommodate the tube stock, drilling and milling side pockets for the guide rods, cutting slits for the guide rod holes to allow for tightening, drilling and milling bolt holes to tighten the clamps on the guide rods and to fasten the L brackets to them. This piece also underwent GD&amp;T. For the GD&amp;T, we specified locations of guide rod holes and the central pocket to within 2 thou of the nominal location. This was specified as these dimensions determine the alignment of the tube stock and the guide rods which are critical structural elements. Tight tolerances were also specified for critical diameters, such as the tub stock pocket and the guide rod holes. This was because if these were oversized it would lead to significant misalignment and that would eat into the error budget that our potting was aiming to correct.</p>
 
       <p>On a side note, looking at Figure 1 we can see that the lathe is held to the base plate via 4 aluminium 6061 L brackets. These were designed, waterjetted and sheet metal bent by me to hold the lathe to the base plate and withstand the dropping and cutting forces that the lathe will experience.</p>
 
       <h2>Carriage Rail Flexure</h2>
 
       <!-- BLOG EDIT: "exact constraint" is a term of art in precision engineering. Add a brief gloss: "exact constraint (meaning each degree of freedom is controlled by exactly one constraint, with no redundancy)" — then continue the sentence as written. -->
-      <p>Now, regarding carriage rail flexure (CRF), this machine element is designed to provide exact constraint (meaning each degree of freedom is controlled by exactly one constraint, with no redundancy) to the carriage which is connected to the guide rods via 5 degrees of freedom (4 of which are handled by the side skirts). Hence, only theta z is constrained by the CRF, and as such, it needs to be designed to be stiff in the y-direction to constrain this degree of freedom and must be compliant or unconstrained by all others to prevent over-constraint. There is a design target y-direction stiffness of 10 N/micron derived from allowable angular deflection of the tool post. Starting from the FBD of the full carriage I related the cutting forces to the loads experienced by the CRF (see Figure 16). The beam itself was modelled as a Timoshenko beam with fixed-guided constraints. We then estimated the stiffness of the full stack of CRF, bronze bushing, epoxy, and guide rod to get system stiffness and then tuned the width of the CRF to achieve the desired system stiffness. The CRF length was determined by the geometry of the guide rod location and the carriage height. To choose the bushing for the CRF, we used the derived load alongside the series stiffness model to determine the force seen in the bushing (~25 lb-f) and the speed at which it was expected to move based on the CNC movement speed (1.33 ft/min). This then gave us a PV value which we compared with the PV values for the following linear sliding bushing types; self-aligning aluminium, fixed alignment stainless steel, fixed alignment aluminium, and bronze sleeve bearing. All of these had PV ratings below the operating values, hence we chose option 4, the bronze sleeve bushing as it was the cheapest.</p>
+      <p>Now, regarding carriage rail flexure (CRF), this machine element is designed to provide exact constraint (meaning each degree of freedom is controlled by exactly one constraint, with no redundancy) to the carriage which is connected to the guide rods via 5 degrees of freedom (4 of which are handled by the side skirts). Hence, only theta z is constrained by the CRF, and as such, it needs to be designed to be stiff in the y-direction to constrain this degree of freedom and must be compliant or unconstrained by all others to prevent over-constraint. There is a design target y-direction stiffness of 10 N/micron derived from allowable angular deflection of the tool post. Starting from the FBD of the full carriage I related the cutting forces to the loads experienced by the CRF (see Figure 13). The beam itself was modelled as a Timoshenko beam with fixed-guided constraints. We then estimated the stiffness of the full stack of CRF, bronze bushing, epoxy, and guide rod to get system stiffness and then tuned the width of the CRF to achieve the desired system stiffness. The CRF length was determined by the geometry of the guide rod location and the carriage height. To choose the bushing for the CRF, we used the derived load alongside the series stiffness model to determine the force seen in the bushing (~25 lb-f) and the speed at which it was expected to move based on the CNC movement speed (1.33 ft/min). This then gave us a PV value which we compared with the PV values for the following linear sliding bushing types; self-aligning aluminium, fixed alignment stainless steel, fixed alignment aluminium, and bronze sleeve bearing. All of these had PV ratings below the operating values, hence we chose option 4, the bronze sleeve bushing as it was the cheapest.</p>
 
       <p>Now to check the designed flexure, we ran first order buckling and fatigue life calculations. Using Euler beam buckling with the worst possible fixed-fixed end constraints, we are orders of magnitude away from buckling. With regards to fatigue, our operating stresses are around ~10MPa, which is so low that fatigue, even for aluminium, is not a consideration.</p>
 
@@ -481,30 +457,22 @@
           <div class="figure__img">
             <img src="../artifacts/lathe/XYViewCarriagev2.png" alt="Y-X plane FBD of the carriage" />
           </div>
-          <p class="figure__caption">Figure 16. Y-X plane FBD of the carriage.</p>
+          <p class="figure__caption">Figure 13. Y-X plane FBD of the carriage.</p>
         </div>
         <div class="figure">
           <div class="figure__img">
             <img src="../artifacts/lathe/YZFBDCarriage.png" alt="Y-Z plane FBD of the carriage" />
           </div>
-          <p class="figure__caption">Figure 17. Y-Z plane FBD of the carriage.</p>
+          <p class="figure__caption">Figure 14. Y-Z plane FBD of the carriage.</p>
         </div>
       </div>
 
-      <p>To further help the selection of the final flexure dimensions, I generated a MATLAB model sweeping flexure width and length across the feasible design space, plotting three outputs: peak von Mises stress, axial stiffness in y, and transverse stiffness in x. The resulting plots, shown in Figure 18 under worst-case cutting conditions (feed of 0.30 mm/rev, depth of cut of 2.0 mm, tool overhang of 51 mm), allow the trade-off between stiffness and fatigue life to be compared. On the stress plot, the dashed black line marks the yield stress and the red contour marks the fatigue stress. Any design to the left of the red line is deemed unsafe for our application. The nominal design point is to the right of both failure boundaries, confirming adequate fatigue margin, while the stiffness plots confirm that the y-direction stiffness is comfortably above the 10 N/&micro;m design target at the nominal point. A key observation from this study is that stiffness is dominated by width, while length has relatively little influence over the feasible range, this informed the decision to vary width as the primary variable while keeping length within geometry constraints.</p>
-
-      <!-- Design sweep not reuploaded — reduced width -->
-      <div class="figure figure--small">
-        <div class="figure__img">
-          <img src="../artifacts/lathe/Design sweep.png" alt="Parametric model for the CRF" />
-        </div>
-        <p class="figure__caption">Figure 18. Parametric model for the CRF. The nominal operating condition is the final design that we used for our CRF.</p>
-      </div>
+      <p>To further help the selection of the final flexure dimensions, I generated a MATLAB model sweeping flexure width and length across the feasible design space, plotting three outputs: peak von Mises stress, axial stiffness in y, and transverse stiffness in x. The resulting plots, under worst-case cutting conditions (feed of 0.30 mm/rev, depth of cut of 2.0 mm, tool overhang of 51 mm), allow the trade-off between stiffness and fatigue life to be compared. On the stress plot, the dashed black line marks the yield stress and the red contour marks the fatigue stress. Any design to the left of the red line is deemed unsafe for our application. The nominal design point is to the right of both failure boundaries, confirming adequate fatigue margin, while the stiffness plots confirm that the y-direction stiffness is comfortably above the 10 N/&micro;m design target at the nominal point. A key observation from this study is that stiffness is dominated by width, while length has relatively little influence over the feasible range, this informed the decision to vary width as the primary variable while keeping length within geometry constraints.</p>
 
       <p>To verify this modelling, a SolidWorks FEA was conducted to determine the deflection and stress distribution throughout the CRF during operation. The FEA showed that for our given 2.5 mm width, we have a maximum stress of 60MPa (maximum). This is the worst case and is significantly higher than the operating load for the fatigue calculations. It is also below the yield stress of the aluminium, so yielding failure is also not a consideration.</p>
 
       <!-- BLOG EDIT: "ban saw off the frame" — should be "bandsaw". Minor typo from the PDF, worth correcting. -->
-      <p>After modelling the CRF, I also machined this. The process was as follows, waterjet the outline (after calibrating the waterjet), drill and tap two holes on the top face for mounting to the carriage and then bandsaw off the frame. Several issues came up during this process. Firstly, the waterjet overcut the fillet on the first iteration (even after calibration, see Figure 19). Moreover, after that first cut, I realised that for ease of water jetting I should increase the thickness of the cylindrical part. After the piece was waterjet properly, whilst clamping in the vice, the CRF frame broke. This frame's purpose was to allow me to clamp the piece in the vise without damaging the flexure. Without this I found another way to clamp it in the vise, by gripping only the thicker top part of the front face.</p>
+      <p>After modelling the CRF, I also machined this. The process was as follows, waterjet the outline (after calibrating the waterjet), drill and tap two holes on the top face for mounting to the carriage and then bandsaw off the frame. Several issues came up during this process. Firstly, the waterjet overcut the fillet on the first iteration (even after calibration, see Figure 15). Moreover, after that first cut, I realised that for ease of water jetting I should increase the thickness of the cylindrical part. After the piece was waterjet properly, whilst clamping in the vice, the CRF frame broke. This frame's purpose was to allow me to clamp the piece in the vise without damaging the flexure. Without this I found another way to clamp it in the vise, by gripping only the thicker top part of the front face.</p>
 
       <p>After it was manufactured, the CRF was put to the test in the death cut in progress review 3 (maximum expected cutting forces). The CRF didn't fail during this test and hasn't failed during drop testing nor any subsequent testing, hence is expected to meet all FRs in ongoing operations.</p>
 
@@ -513,23 +481,7 @@
         <div class="figure__img">
           <img src="../artifacts/lathe/FailedWaterjet.PNG" alt="Failed waterjet attempt on the CRF" style="max-width: 412px;" />
         </div>
-        <p class="figure__caption">Figure 19. Failed waterjet attempt on the CRF.</p>
-      </div>
-
-      <!-- StressFEA and StrainFEA reuploaded — full width pair -->
-      <div class="figure-row">
-        <div class="figure">
-          <div class="figure__img">
-            <img src="../artifacts/lathe/StressFEA.PNG" alt="SolidWorks FEA maximum stress" />
-          </div>
-          <p class="figure__caption">Figure 20. SolidWorks FEA shows maximum stress at fillet of ~70MPa.</p>
-        </div>
-        <div class="figure">
-          <div class="figure__img">
-            <img src="../artifacts/lathe/StrainFEA.PNG" alt="SolidWorks FEA maximum deflection" />
-          </div>
-          <p class="figure__caption">Figure 21. SolidWorks FEA shows maximum deflection of 0.3mm.</p>
-        </div>
+        <p class="figure__caption">Figure 15. Failed waterjet attempt on the CRF.</p>
       </div>
 
       <p>Finally, for the side skirt CAD and process plan, I was involved in helping Niki create the CAD for this based on measurements we had taken. Additionally, I needed to modify the side skirt geometry to allow us to mount the CNC motor to the cross slide, which I did by increasing the length of the side skirt and adding two additional bolt holes to each side skirt. This meant that I had to water jet custom motor mounts to our specifications, which I did out of &frac18; in thick aluminium 6061.</p>
@@ -542,7 +494,7 @@
 
       <p>Our CNC system consists of 2 Nema 23 2.4Nm stepper motors which drive their respective lead screws through a double diaphragm coupler. They are powered by off-the-shelf software (GRBL), power supplies, drivers, and controllers (Arduino Uno). For this system I completed the component selection for almost all components, derived a first pass on all the CNC FRs, modelled the torque requirements for the motors and designed and fabricated the cross-slide CNC motor mounts.</p>
 
-      <p>For the motor selection process, their driving requirement was torque at a given RPM. To determine the required torque, we considered the torque required to achieve the desired angular acceleration of the lead screw, the desired linear acceleration of the carriage and/or dovetail, and the rotational inertia of the coupling and the motor ~0.6 Nm (see Figure 22). Then from there we had the desired RPM derived from the material removal rate lathe level FR (~160RPM both axes). From this I looked at manufacturers specification sheets and found a reasonably priced and relatively easy to ship (US based supplier) motor that could provide the required torque at the desired RPM.</p>
+      <p>For the motor selection process, their driving requirement was torque at a given RPM. To determine the required torque, we considered the torque required to achieve the desired angular acceleration of the lead screw, the desired linear acceleration of the carriage and/or dovetail, and the rotational inertia of the coupling and the motor ~0.6 Nm (see Figure 16). Then from there we had the desired RPM derived from the material removal rate lathe level FR (~160RPM both axes). From this I looked at manufacturers specification sheets and found a reasonably priced and relatively easy to ship (US based supplier) motor that could provide the required torque at the desired RPM.</p>
 
       <!-- MotorTorque reuploaded from portfolio PDF — reduced width pair -->
       <div class="figure-row figure-row--small">
@@ -550,24 +502,24 @@
           <div class="figure__img">
             <img src="../artifacts/lathe/MotorTorque.PNG" alt="Torque calculations page 1" />
           </div>
-          <p class="figure__caption">Figure 22a. Torque calculations for both motors (page 1).</p>
+          <p class="figure__caption">Figure 16a. Torque calculations for both motors (page 1).</p>
         </div>
         <div class="figure">
           <div class="figure__img">
             <img src="../artifacts/lathe/MotorTorque_2.PNG" alt="Torque calculations page 2" />
           </div>
-          <p class="figure__caption">Figure 22b. Torque calculations for both motors (page 2).</p>
+          <p class="figure__caption">Figure 16b. Torque calculations for both motors (page 2).</p>
         </div>
       </div>
 
-      <p>The CNC motor mounts were really fun to make. This one involved minimal calculation, I just needed to make sure that Al5052 at 1/8" in thickness would be able to hold the weight of the motor without fatigue failure. The resulting shear load is ~2 MPa, which is far below anything that would cause fatigue. The CAD was created and the shape shown in Figure 23 was cut on the waterjet. Then the centre pocket was bored to the diameter of the motor, and the bolt holes were all drilled through. Then the sides were sheet metal bent to 90 degrees, and it was bolted to the side skirts. One interesting thing that I learnt after failing to bend sheet metal the first time was that it is important to have relief cuts inside anything large that you want to bend so long as these relief cuts don't cause unreasonable stress concentrations in your design. Otherwise (as mine did), your piece will fracture during bending. The second learning here was that it is important to calculate your spring back before doing the bending. It is really frustrating to undo improperly bent pieces of metal.</p>
+      <p>The CNC motor mounts were really fun to make. This one involved minimal calculation, I just needed to make sure that Al5052 at 1/8" in thickness would be able to hold the weight of the motor without fatigue failure. The resulting shear load is ~2 MPa, which is far below anything that would cause fatigue. The CAD was created and the shape shown in Figure 17 was cut on the waterjet. Then the centre pocket was bored to the diameter of the motor, and the bolt holes were all drilled through. Then the sides were sheet metal bent to 90 degrees, and it was bolted to the side skirts. One interesting thing that I learnt after failing to bend sheet metal the first time was that it is important to have relief cuts inside anything large that you want to bend so long as these relief cuts don't cause unreasonable stress concentrations in your design. Otherwise (as mine did), your piece will fracture during bending. The second learning here was that it is important to calculate your spring back before doing the bending. It is really frustrating to undo improperly bent pieces of metal.</p>
 
       <!-- CNC Motor Mount reuploaded — full width -->
       <div class="figure">
         <div class="figure__img">
           <img src="../artifacts/lathe/CNC Motor Mount.PNG" alt="Schematic of the CNC motor mounts for the cross slide" style="max-width: 573px;" />
         </div>
-        <p class="figure__caption">Figure 23. Schematic of the CNC motor mounts for the cross slide.</p>
+        <p class="figure__caption">Figure 17. Schematic of the CNC motor mounts for the cross slide.</p>
       </div>
 
       <h2>Lessons Learnt</h2>
@@ -576,13 +528,11 @@
 
       <p>In terms of machining learnings, I came into this class with next to no prior machining experience. Now I feel confident that if you gave me a day and told me to machine something I could do it. I really should have started machining sooner in the class. I only started machining in the back end of the class and this set me back a fair bit. If I had taken longer at the beginning of the class to be average at machining, I would have been in a better place to do more work for the spindle and cross slide. Additionally, I learnt that machining things takes a lot longer than I expected and is hard to do to high accuracy. Machining requires that you do not rush if you are to achieve tight tolerances. It is one of those things that the more time you spend doing it the better you get and this is something that I want to keep working on going forward.</p>
 
-      <p>In terms of content that I learnt during the class. I had never taken a machine element or machine design course before this. This meant that everything from bearings to lead screws were new to me. It took me a long time to get my head around all these new concepts as they came in thick and fast, especially at the beginning. In retrospect, spending more time early on trying to get ahead on some of the lecture content would've been valuable to get myself across some of the machine elements that most people in my group already knew about and would've set myself up to have ideas about how I could model them.</p>
-
       <p>This class has taught me that it is really, really important that you think. When considering a problem, it is important not to rush into getting to work straight away but you must take your time and really try to understand the whole problem completely and check your ego at the door. Many times throughout the class I thought I understood what someone was saying or what the problem was and I didn't stop and think and this led to hours of wasted work going down a dead end.</p>
 
-      <p>Leaning on others for help when necessary is incredibly valuable. I think throughout the class there have been many times that I have been struggling with a problem and then 30 minutes of blackboard work with another person and the whole issue is a lot clearer. Even reaching out to others outside the class has been valuable, especially chatting with those who have taken the class before. This has steered me in the right direction many times and saved many hours of wasted work.</p>
+      <p>Leaning on others for help when necessary is incredibly valuable. I think throughout the class there have been many times that I have been struggling with a problem and then after 30 minutes of blackboard work with another person the whole issue is a lot clearer. Even reaching out to others outside the class has been valuable, especially chatting with those who have taken the class before. This has steered me in the right direction many times and saved many hours of wasted work.</p>
 
-      <p>Anyway, to go over all the lessons learnt would take too long as I learnt a great deal at every step of the way and I can't believe how far the team (and I) have come.</p>
+      <p>The full portfolio, with the complete set of figures and calculations, is available as a <a href="../artifacts/lathe/2.72-portfolio.pdf" target="_blank" rel="noopener">downloadable PDF</a>.</p>
 
     </div>
   </article>
